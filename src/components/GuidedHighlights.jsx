@@ -69,9 +69,9 @@ export default function GuidedHighlights() {
   return (
     <section id="guide-info" className="py-20 relative bg-slate-50/60 border-y border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Asymmetrical Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -83,13 +83,14 @@ export default function GuidedHighlights() {
               <Sparkles size={13} className="text-blue-600" />
               <span>Core Strengths</span>
             </span>
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight font-display text-slate-900">
+            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-display text-slate-900">
               Why Ambitious Students Choose SR Overseas
             </h2>
+            <p className="text-slate-600 text-sm max-w-md font-normal">
+              Delivering transparent admissions and visa successes backed by years of elite counselor expertise.
+            </p>
           </div>
-          <p className="text-slate-600 text-sm max-w-md font-normal">
-            Delivering transparent admissions and visa successes backed by years of elite counselor expertise.
-          </p>
+
         </motion.div>
 
         {/* Subtle, Clean 6-Item Bento Grid */}
@@ -97,7 +98,7 @@ export default function GuidedHighlights() {
           {highlights.map((item, idx) => {
             const IconComponent = item.icon;
             return (
-              <motion.div 
+              <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -116,8 +117,8 @@ export default function GuidedHighlights() {
                       </span>
                     )}
                   </div>
-                  
-                  <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 font-display group-hover:text-blue-600 transition-colors">
+
+                  <h3 className="text-xl sm:text-2xl font-bold text-slate-900 font-display group-hover:text-blue-600 transition-colors">
                     {item.title}
                   </h3>
 
@@ -127,8 +128,8 @@ export default function GuidedHighlights() {
                 </div>
 
                 <div className="pt-4 border-t border-slate-100">
-                  <a 
-                    href={item.link} 
+                  <a
+                    href={item.link}
                     className={`inline-flex items-center gap-1.5 text-xs font-bold ${item.accent} transition-colors`}
                   >
                     <span>Explore Feature</span>

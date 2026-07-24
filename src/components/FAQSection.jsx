@@ -13,9 +13,9 @@ export default function FAQSection() {
   return (
     <section id="faq" className="py-24 relative bg-white border-t border-slate-200">
       <div className="container mx-auto max-w-4xl">
-        
+
         {/* Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -26,7 +26,7 @@ export default function FAQSection() {
             <Sparkles size={14} className="text-blue-600" />
             <span>Queries & Answers</span>
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight font-display text-slate-900">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-display text-slate-900">
             Frequently Asked Questions
           </h2>
           <p className="text-slate-600 text-sm sm:text-base font-normal">
@@ -39,15 +39,14 @@ export default function FAQSection() {
           {faqData.map((item, idx) => {
             const isOpen = openIdx === idx;
             return (
-              <motion.div 
+              <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: idx * 0.05 }}
-                className={`bg-white rounded-2xl border transition-colors duration-200 overflow-hidden ${
-                  isOpen ? 'border-blue-500 shadow-md ring-1 ring-blue-500/20' : 'border-slate-200'
-                }`}
+                className={`bg-white rounded-2xl border transition-colors duration-200 overflow-hidden ${isOpen ? 'border-blue-500 shadow-md ring-1 ring-blue-500/20' : 'border-slate-200'
+                  }`}
               >
                 <button
                   onClick={() => toggleFAQ(idx)}
@@ -57,9 +56,8 @@ export default function FAQSection() {
                     <HelpCircle size={18} className="text-blue-600 flex-shrink-0" />
                     <span>{item.q}</span>
                   </span>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-transform duration-300 ${
-                    isOpen ? 'bg-blue-600 text-white rotate-180' : 'bg-slate-100 text-slate-500'
-                  }`}>
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center transition-transform duration-300 ${isOpen ? 'bg-blue-600 text-white rotate-180' : 'bg-slate-100 text-slate-500'
+                    }`}>
                     {isOpen ? <Minus size={16} /> : <Plus size={16} />}
                   </div>
                 </button>

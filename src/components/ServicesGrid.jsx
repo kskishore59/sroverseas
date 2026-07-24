@@ -15,14 +15,14 @@ export default function ServicesGrid() {
   return (
     <section id="services" className="py-24 relative bg-slate-50 border-t border-slate-200">
       <div className="container mx-auto">
-        
+
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
           <span className="badge-tag">
             <Sparkles size={14} className="text-blue-600" />
             <span>Our Expertise</span>
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight font-display text-slate-900">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-display text-slate-900">
             Comprehensive Student Services
           </h2>
           <p className="text-slate-600 text-sm sm:text-base font-normal">
@@ -35,13 +35,13 @@ export default function ServicesGrid() {
           {servicesData.map((service) => {
             const Icon = iconMap[service.icon] || GraduationCap;
             return (
-              <div 
+              <div
                 key={service.id}
                 className="bg-white p-8 rounded-3xl border border-slate-200 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group flex flex-col justify-between"
               >
                 <div className="space-y-4">
                   <div className="flex justify-between items-start">
-                    <div 
+                    <div
                       className="w-14 h-14 rounded-2xl flex items-center justify-center font-bold shadow-sm transition-transform group-hover:scale-110"
                       style={{ backgroundColor: `${service.color}15`, color: service.color, border: `1px solid ${service.color}30` }}
                     >
@@ -62,8 +62,8 @@ export default function ServicesGrid() {
                 </div>
 
                 <div className="pt-6 mt-6 border-t border-slate-100">
-                  <a 
-                    href="#contact" 
+                  <a
+                    href="#contact"
                     className="inline-flex items-center gap-2 text-xs font-bold text-blue-600 hover:text-blue-700 transition-colors"
                   >
                     <span>Request Service Guidance</span>

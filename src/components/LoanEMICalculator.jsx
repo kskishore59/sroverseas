@@ -8,7 +8,7 @@ export default function LoanEMICalculator() {
 
   const monthlyRate = interestRate / 12 / 100;
   const totalMonths = tenureYears * 12;
-  
+
   const emi = Math.round(
     (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) /
     (Math.pow(1 + monthlyRate, totalMonths) - 1)
@@ -20,11 +20,11 @@ export default function LoanEMICalculator() {
   return (
     <section id="loan-calculator" className="py-24 relative bg-slate-50">
       <div className="container mx-auto">
-        
+
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
           <span className="badge-tag">Financial Assistance</span>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight font-display text-slate-900">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-display text-slate-900">
             Education Loan & Monthly EMI Estimator
           </h2>
           <p className="text-slate-600 text-sm sm:text-base font-normal">
@@ -34,17 +34,17 @@ export default function LoanEMICalculator() {
 
         {/* Calculator Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-          
+
           {/* Left Sliders Card */}
           <div className="lg:col-span-7 bg-white p-8 rounded-3xl border border-slate-200 shadow-lg space-y-6 text-xs">
-            
+
             {/* Slider 1: Loan Amount */}
             <div className="space-y-2">
               <div className="flex justify-between items-center text-sm">
                 <span className="font-bold text-slate-800">Desired Loan Amount</span>
                 <span className="font-extrabold text-emerald-600 text-base">₹ {(loanAmount / 100000).toFixed(1)} Lakhs</span>
               </div>
-              <input 
+              <input
                 type="range"
                 min={500000}
                 max={7500000}
@@ -66,7 +66,7 @@ export default function LoanEMICalculator() {
                 <span className="font-bold text-slate-800">Repayment Tenure</span>
                 <span className="font-extrabold text-blue-600 text-base">{tenureYears} Years</span>
               </div>
-              <input 
+              <input
                 type="range"
                 min={1}
                 max={12}
@@ -88,7 +88,7 @@ export default function LoanEMICalculator() {
                 <span className="font-bold text-slate-800">Estimated Interest Rate (p.a.)</span>
                 <span className="font-extrabold text-amber-600 text-base">{interestRate}%</span>
               </div>
-              <input 
+              <input
                 type="range"
                 min={7.5}
                 max={14.0}
@@ -115,7 +115,7 @@ export default function LoanEMICalculator() {
 
               <div className="space-y-1">
                 <div className="text-xs font-bold text-slate-500 uppercase tracking-wider">Estimated Monthly EMI</div>
-                <div className="text-4xl font-black text-emerald-600 font-display">
+                <div className="text-4xl font-extrabold text-emerald-600 font-display">
                   ₹ {emi.toLocaleString('en-IN')} <span className="text-xs text-slate-500 font-normal">/ mo</span>
                 </div>
               </div>
@@ -132,8 +132,8 @@ export default function LoanEMICalculator() {
               </div>
 
               <div className="pt-2">
-                <a 
-                  href="#contact" 
+                <a
+                  href="#contact"
                   className="btn-primary w-full py-4 text-xs font-bold bg-emerald-600 hover:bg-emerald-500 shadow-emerald-600/20"
                 >
                   <span>Apply for Collateral-Free Loan</span>

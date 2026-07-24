@@ -70,14 +70,14 @@ export default function CostCalculatorWidget() {
   return (
     <section id="budget-calculator" className="py-24 relative bg-white">
       <div className="container mx-auto">
-        
+
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
           <span className="badge-tag">
             <Sparkles size={14} className="text-blue-600" />
             <span>Cost Calculator</span>
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight font-display text-slate-900">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-display text-slate-900">
             Budget Calculator & Destination Compare
           </h2>
           <p className="text-slate-600 text-sm sm:text-base font-normal">
@@ -86,7 +86,7 @@ export default function CostCalculatorWidget() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          
+
           {/* Card 1: Interactive Calculator */}
           <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-lg space-y-6">
             <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
@@ -100,21 +100,21 @@ export default function CostCalculatorWidget() {
             </div>
 
             <div className="space-y-4 text-xs">
-              <CustomSelect 
+              <CustomSelect
                 label="Select Target Country"
                 options={countrySelectOptions}
                 value={calcCountry}
                 onChange={setCalcCountry}
               />
 
-              <CustomSelect 
+              <CustomSelect
                 label="Course Duration"
                 options={durationOptions}
                 value={calcDuration}
                 onChange={setCalcDuration}
               />
 
-              <button 
+              <button
                 onClick={calculateCost}
                 className="btn-primary w-full py-3.5 mt-2"
               >
@@ -152,14 +152,14 @@ export default function CostCalculatorWidget() {
             </div>
 
             <div className="grid grid-cols-2 gap-4 text-xs">
-              <CustomSelect 
+              <CustomSelect
                 label="Country A"
                 options={countrySelectOptions}
                 value={compA}
                 onChange={setCompA}
               />
 
-              <CustomSelect 
+              <CustomSelect
                 label="Country B"
                 options={countrySelectOptions}
                 value={compB}
@@ -167,7 +167,7 @@ export default function CostCalculatorWidget() {
               />
             </div>
 
-            <button 
+            <button
               onClick={handleCompare}
               className="btn-outline w-full py-3.5"
             >
@@ -183,7 +183,7 @@ export default function CostCalculatorWidget() {
                   <span className="text-blue-600">{compResult.a.flag} {compResult.a.name}</span>
                   <span className="text-indigo-600">{compResult.b.flag} {compResult.b.name}</span>
                 </div>
-                
+
                 <div className="grid grid-cols-3 gap-2 py-1 border-b border-slate-200/60">
                   <span className="text-slate-500">Tuition</span>
                   <span className="text-slate-800 text-center font-bold">{compResult.a.tuitionCost}</span>
