@@ -64,7 +64,7 @@ export default function Hero() {
     ];
 
     // Constellation Particles
-    const particles = Array.from({ length: 65 }, () => ({
+    const particles = Array.from({ length: 75 }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
       vx: (Math.random() - 0.5) * 0.3,
@@ -81,7 +81,8 @@ export default function Hero() {
       let globeCenterX = width * 0.75;
       let globeCenterY = height * 0.5;
       const isDesktop = width >= 1024;
-      const globeRadius = isDesktop ? 295 : Math.min(width, height) * 0.32;
+      // SIGNIFICANTLY INCREASED GLOBE RADIUS: 430px on desktop
+      const globeRadius = isDesktop ? 330 : Math.min(width, height) * 0.33;
 
       if (isDesktop && cardRef.current && canvas) {
         const cardRect = cardRef.current.getBoundingClientRect();
@@ -94,7 +95,7 @@ export default function Hero() {
       }
 
       // Render 3D Rotating Globe Wireframe Ring
-      globeRotation += 0.004;
+      globeRotation += 0.0035;
 
       ctx.save();
       ctx.translate(globeCenterX, globeCenterY);
@@ -126,8 +127,8 @@ export default function Hero() {
       // Draw Outer Rim Glow Ring
       ctx.beginPath();
       ctx.arc(0, 0, globeRadius, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(37, 99, 235, 0.30)';
-      ctx.lineWidth = 2;
+      ctx.strokeStyle = 'rgba(37, 99, 235, 0.32)';
+      ctx.lineWidth = 2.2;
       ctx.stroke();
 
       // Pulsing Beacon Nodes on Globe
@@ -139,10 +140,10 @@ export default function Hero() {
 
         if (visible) {
           ctx.beginPath();
-          ctx.arc(bx, by, 5, 0, Math.PI * 2);
+          ctx.arc(bx, by, 5.5, 0, Math.PI * 2);
           ctx.fillStyle = '#2563EB';
           ctx.shadowColor = '#2563EB';
-          ctx.shadowBlur = 12;
+          ctx.shadowBlur = 14;
           ctx.fill();
           ctx.shadowBlur = 0;
         }
@@ -156,11 +157,11 @@ export default function Hero() {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 130) {
+          if (dist < 135) {
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(37, 99, 235, ${0.15 * (1 - dist / 130)})`;
+            ctx.strokeStyle = `rgba(37, 99, 235, ${0.15 * (1 - dist / 135)})`;
             ctx.lineWidth = 0.9;
             ctx.stroke();
           }
@@ -191,16 +192,16 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-[90vh] pt-8 pb-20 flex items-center overflow-hidden bg-gradient-to-b from-blue-50/60 via-white to-slate-50 bg-grid-pattern">
+    <section id="home" className="relative min-h-[92vh] pt-8 pb-20 flex items-center overflow-hidden bg-gradient-to-b from-blue-50/60 via-white to-slate-50 bg-grid-pattern">
 
       {/* Background 3D Globe Canvas */}
-      <div className="absolute inset-0 max-h-7xl w-full overflow-hidden pointer-events-none z-0">
+      <div className="absolute inset-0 max-h-full w-full ml-20 overflow-hidden pointer-events-none z-0">
         <canvas ref={canvasRef} className="w-full h-full" />
       </div>
 
       {/* Aurora Light Spotlights */}
-      <div className="absolute top-1/4 left-1/6 w-[600px] h-[600px] bg-blue-400/15 rounded-full blur-[140px] pointer-events-none aurora-blob-1" />
-      <div className="absolute bottom-1/4 right-1/6 w-[600px] h-[600px] bg-indigo-400/15 rounded-full blur-[140px] pointer-events-none aurora-blob-2" />
+      <div className="absolute top-1/4 left-1/6 w-[650px] h-[650px] bg-blue-400/15 rounded-full blur-[140px] pointer-events-none aurora-blob-1" />
+      <div className="absolute bottom-1/4 right-1/6 w-[650px] h-[650px] bg-indigo-400/15 rounded-full blur-[140px] pointer-events-none aurora-blob-2" />
 
       {/* Enforced max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 for perfect widescreen alignment */}
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
