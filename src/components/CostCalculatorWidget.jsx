@@ -1,215 +1,168 @@
 import React, { useState } from 'react';
-import { countriesData } from '../data/countriesData';
-import { Calculator, ArrowRightLeft, DollarSign, Clock, Shield, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Calculator, DollarSign, Sparkles, Building2, Globe } from 'lucide-react';
 import CustomSelect from './CustomSelect';
 
 export default function CostCalculatorWidget() {
-  const [calcCountry, setCalcCountry] = useState('germany');
-  const [calcDuration, setCalcDuration] = useState(2);
-  const [calcResult, setCalcResult] = useState(null);
+  const [country, setCountry] = useState('germany');
+  const [degree, setDegree] = useState('master');
+  const [duration, setDuration] = useState(2);
 
-  const [compA, setCompA] = useState('germany');
-  const [compB, setCompB] = useState('canada');
-  const [compResult, setCompResult] = useState(null);
+  const countryOptions = [
+    { value: 'germany', label: 'Germany (€0 Public Tuition)', icon: '🇩🇪' },
+    { value: 'canada', label: 'Canada ($11,500 CAD/Yr)', icon: '🇨🇦' },
+    { value: 'uk', label: 'United Kingdom (£12,000/Yr)', icon: '🇬🇧' },
+    { value: 'usa', label: 'United States ($14,000 USD/Yr)', icon: '🇺🇸' },
+    { value: 'australia', label: 'Australia ($15,000 AUD/Yr)', icon: '🇦🇺' },
+    { value: 'georgia', label: 'Georgia MBBS ($5,000 USD/Yr)', icon: '🇬🇪' }
+  ];
 
-  const countrySelectOptions = countriesData.map((c) => ({
-    value: c.id,
-    label: `${c.name} (${c.tuitionCost})`,
-    icon: c.flag
-  }));
-
-  const durationOptions = [
-    { value: 1, label: '1 Year (Fast-Track Master\'s)' },
-    { value: 2, label: '2 Years (Standard Master\'s / PG Diploma)' },
-    { value: 3, label: '3 Years (Bachelor\'s Degree)' },
-    { value: 4, label: '4 Years (Honours Bachelor\'s)' }
+  const degreeOptions = [
+    { value: 'master', label: "Master's Degree (1-2 Years)" },
+    { value: 'bachelor', label: "Bachelor's Degree (3-4 Years)" },
+    { value: 'diploma', label: "PG Diploma (1 Year)" }
   ];
 
   const calculateCost = () => {
-    const country = countriesData.find((c) => c.id === calcCountry);
-    if (!country) return;
-
-    let annualLiving = 0;
-    let currencySymbol = country.currency;
+    let yearlyTuition = 12000;
+    let yearlyLiving = 10000;
     let inrRate = 90;
 
-    switch (country.id) {
-      case 'germany': annualLiving = 11208; inrRate = 90; break;
-      case 'canada': annualLiving = 20635; inrRate = 62; break;
-      case 'usa': annualLiving = 15000; inrRate = 83; break;
-      case 'uk': annualLiving = 12000; inrRate = 106; break;
-      case 'australia': annualLiving = 24505; inrRate = 55; break;
-      case 'france': annualLiving = 9600; inrRate = 90; break;
-      case 'ireland': annualLiving = 10000; inrRate = 90; break;
-      default: annualLiving = 10000; inrRate = 80;
+    if (country === 'germany') {
+      yearlyTuition = 0; // Public €0
+      yearlyLiving = 11208; // Blocked Account
+      inrRate = 90;
+    } else if (country === 'canada') {
+      yearlyTuition = 16000;
+      yearlyLiving = 20635;
+      inrRate = 62;
+    } else if (country === 'uk') {
+      yearlyTuition = 14000;
+      yearlyLiving = 12000;
+      inrRate = 106;
+    } else if (country === 'usa') {
+      yearlyTuition = 22000;
+      yearlyLiving = 14000;
+      inrRate = 84;
+    } else if (country === 'australia') {
+      yearlyTuition = 24000;
+      yearlyLiving = 18000;
+      inrRate = 56;
+    } else if (country === 'georgia') {
+      yearlyTuition = 5000;
+      yearlyLiving = 4000;
+      inrRate = 84;
     }
 
-    const totalTuition = country.tuitionMin * calcDuration;
-    const totalLiving = annualLiving * calcDuration;
-    const totalLocal = totalTuition + totalLiving;
-    const totalINR = (totalLocal * inrRate).toLocaleString('en-IN');
+    const totalTuition = yearlyTuition * duration;
+    const totalLiving = yearlyLiving * duration;
+    const grandTotalForeign = totalTuition + totalLiving;
+    const grandTotalINR = Math.round(grandTotalForeign * inrRate);
 
-    setCalcResult({
-      countryName: country.name,
-      flag: country.flag,
-      duration: calcDuration,
-      tuition: country.tuitionCost,
-      annualLiving: `${currencySymbol} ${annualLiving.toLocaleString()}`,
-      totalLocal: `${currencySymbol} ${totalLocal.toLocaleString()}`,
-      totalINR: `₹ ${totalINR}`,
-      workPermit: country.postStudyVisa
-    });
+    return {
+      yearlyTuition,
+      yearlyLiving,
+      totalTuition,
+      totalLiving,
+      grandTotalForeign,
+      grandTotalINR: (grandTotalINR / 100000).toFixed(2) // Lakhs
+    };
   };
 
-  const handleCompare = () => {
-    const countryA = countriesData.find((c) => c.id === compA);
-    const countryB = countriesData.find((c) => c.id === compB);
-    setCompResult({ a: countryA, b: countryB });
-  };
+  const costData = calculateCost();
 
   return (
-    <section id="budget-calculator" className="py-24 relative bg-white">
-      <div className="container mx-auto">
-
+    <section id="budget-calculator" className="py-24 relative bg-slate-50 border-t border-slate-200">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center space-y-3 mb-12"
+        >
           <span className="badge-tag">
-            <Sparkles size={14} className="text-blue-600" />
-            <span>Cost Calculator</span>
+            <Calculator size={14} className="text-blue-600" />
+            <span>Low-Budget Estimator</span>
           </span>
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-display text-slate-900">
-            Budget Calculator & Destination Compare
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight font-display text-slate-900">
+            Study Abroad Cost & Budget Estimator
           </h2>
-          <p className="text-slate-600 text-sm sm:text-base font-normal">
-            Plan your finances starting from the lowest tuition paths. Zero high budget surprises.
+          <p className="text-slate-600 text-xs sm:text-base font-normal max-w-2xl mx-auto">
+            Calculate your total foreign currency tuition + living expenses converted directly to INR Lakhs.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Card Calculator */}
+        <div className="bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-xl space-y-8">
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <CustomSelect 
+              label="1. Target Destination"
+              options={countryOptions}
+              value={country}
+              onChange={setCountry}
+            />
 
-          {/* Card 1: Interactive Calculator */}
-          <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-lg space-y-6">
-            <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
-              <div className="w-12 h-12 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
-                <Calculator size={24} />
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-slate-900 font-display">Low-Budget Cost Calculator</h3>
-                <p className="text-xs text-slate-500">Estimate tuition & living cost breakdown</p>
-              </div>
-            </div>
-
-            <div className="space-y-4 text-xs">
-              <CustomSelect
-                label="Select Target Country"
-                options={countrySelectOptions}
-                value={calcCountry}
-                onChange={setCalcCountry}
-              />
-
-              <CustomSelect
-                label="Course Duration"
-                options={durationOptions}
-                value={calcDuration}
-                onChange={setCalcDuration}
-              />
-
-              <button
-                onClick={calculateCost}
-                className="btn-primary w-full py-3.5 mt-2"
-              >
-                <span>Calculate Total Estimated Budget</span>
-                <Sparkles size={16} />
-              </button>
-            </div>
-
-            {/* Calculation Result Container */}
-            {calcResult && (
-              <div className="p-5 bg-blue-50/60 rounded-2xl border border-blue-100 space-y-3 animate-fade-in">
-                <div className="flex justify-between items-center text-sm font-bold text-slate-900 border-b border-blue-100 pb-2">
-                  <span>{calcResult.flag} {calcResult.countryName} ({calcResult.duration} Year Path)</span>
-                  <span className="text-emerald-600 font-extrabold text-lg">{calcResult.totalINR} Approx</span>
-                </div>
-                <div className="grid grid-cols-2 gap-2 text-xs text-slate-700">
-                  <div>Tuition Range: <strong className="text-slate-900 block">{calcResult.tuition}</strong></div>
-                  <div>Living Expenses: <strong className="text-slate-900 block">{calcResult.annualLiving} / Yr</strong></div>
-                  <div className="col-span-2 pt-1 text-blue-600 font-bold">Post-Study Work Visa: {calcResult.workPermit}</div>
-                </div>
-              </div>
-            )}
+            <CustomSelect 
+              label="2. Degree Level"
+              options={degreeOptions}
+              value={degree}
+              onChange={setDegree}
+            />
           </div>
 
-          {/* Card 2: Side-by-Side Comparison */}
-          <div className="bg-white p-8 rounded-3xl border border-slate-200 shadow-lg space-y-6">
-            <div className="flex items-center gap-3 border-b border-slate-100 pb-4">
-              <div className="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
-                <ArrowRightLeft size={24} />
-              </div>
+          <div className="space-y-2">
+            <div className="flex justify-between text-xs font-bold text-slate-800">
+              <span>Program Duration</span>
+              <span className="text-blue-600 font-extrabold">{duration} Year(s)</span>
+            </div>
+            <input 
+              type="range" 
+              min="1" 
+              max="4" 
+              value={duration}
+              onChange={(e) => setDuration(Number(e.target.value))}
+              className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-blue-600"
+            />
+            <div className="flex justify-between text-[10px] text-slate-500">
+              <span>1 Year (Fast-Track)</span>
+              <span>2 Years (Standard Master's)</span>
+              <span>4 Years (Bachelor's)</span>
+            </div>
+          </div>
+
+          {/* Breakdown Matrix */}
+          <div className="p-6 bg-slate-900 text-white rounded-2xl border border-slate-800 space-y-6">
+            <div className="flex justify-between items-center border-b border-slate-800 pb-4">
               <div>
-                <h3 className="text-xl font-bold text-slate-900 font-display">Compare Destinations Side-by-Side</h3>
-                <p className="text-xs text-slate-500">Tuition, work rights, and visa rules comparison</p>
+                <span className="text-[10px] uppercase font-extrabold text-blue-400 tracking-wider">Estimated Total Budget</span>
+                <div className="text-3xl sm:text-4xl font-black font-display text-emerald-400 mt-1">
+                  ₹{costData.grandTotalINR} Lakhs <span className="text-xs font-bold text-slate-400">Total Approx</span>
+                </div>
               </div>
+              <a href="#loan-calculator" className="btn-primary text-xs py-2.5 px-4 shadow-md">
+                Get Loan Assistance
+              </a>
             </div>
 
             <div className="grid grid-cols-2 gap-4 text-xs">
-              <CustomSelect
-                label="Country A"
-                options={countrySelectOptions}
-                value={compA}
-                onChange={setCompA}
-              />
-
-              <CustomSelect
-                label="Country B"
-                options={countrySelectOptions}
-                value={compB}
-                onChange={setCompB}
-              />
-            </div>
-
-            <button
-              onClick={handleCompare}
-              className="btn-outline w-full py-3.5"
-            >
-              <span>Compare Budget Details</span>
-              <ArrowRightLeft size={16} />
-            </button>
-
-            {/* Comparison Table Output */}
-            {compResult && (
-              <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 space-y-3 text-xs">
-                <div className="grid grid-cols-3 gap-2 font-bold text-center border-b border-slate-200 pb-2">
-                  <span className="text-slate-500 text-left">Metric</span>
-                  <span className="text-blue-600">{compResult.a.flag} {compResult.a.name}</span>
-                  <span className="text-indigo-600">{compResult.b.flag} {compResult.b.name}</span>
-                </div>
-
-                <div className="grid grid-cols-3 gap-2 py-1 border-b border-slate-200/60">
-                  <span className="text-slate-500">Tuition</span>
-                  <span className="text-slate-800 text-center font-bold">{compResult.a.tuitionCost}</span>
-                  <span className="text-slate-800 text-center font-bold">{compResult.b.tuitionCost}</span>
-                </div>
-
-                <div className="grid grid-cols-3 gap-2 py-1 border-b border-slate-200/60">
-                  <span className="text-slate-500">Scholarship</span>
-                  <span className="text-amber-700 text-center font-bold">{compResult.a.scholarship}</span>
-                  <span className="text-amber-700 text-center font-bold">{compResult.b.scholarship}</span>
-                </div>
-
-                <div className="grid grid-cols-3 gap-2 py-1 border-b border-slate-200/60">
-                  <span className="text-slate-500">Work Hours</span>
-                  <span className="text-slate-800 text-center">{compResult.a.workHours}</span>
-                  <span className="text-slate-800 text-center">{compResult.b.workHours}</span>
-                </div>
-
-                <div className="grid grid-cols-3 gap-2 py-1">
-                  <span className="text-slate-500">PSW Visa</span>
-                  <span className="text-emerald-600 text-center font-bold">{compResult.a.postStudyVisa}</span>
-                  <span className="text-emerald-600 text-center font-bold">{compResult.b.postStudyVisa}</span>
+              <div className="p-3.5 bg-slate-800/80 rounded-xl border border-slate-700">
+                <div className="text-slate-400 text-[10px] uppercase font-bold">Total Tuition ({duration} Yrs)</div>
+                <div className="text-base font-extrabold text-white mt-1">
+                  {country === 'germany' ? '€0 Tuition Fee Waiver' : `$${costData.totalTuition.toLocaleString()}`}
                 </div>
               </div>
-            )}
 
+              <div className="p-3.5 bg-slate-800/80 rounded-xl border border-slate-700">
+                <div className="text-slate-400 text-[10px] uppercase font-bold">Living & GIC/Blocked ({duration} Yrs)</div>
+                <div className="text-base font-extrabold text-white mt-1">
+                  ${costData.totalLiving.toLocaleString()}
+                </div>
+              </div>
+            </div>
           </div>
 
         </div>

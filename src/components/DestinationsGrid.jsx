@@ -14,10 +14,10 @@ export default function DestinationsGrid() {
 
   return (
     <section id="countries" className="py-24 relative bg-white border-t border-slate-200">
-      <div className="container mx-auto">
-
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         {/* Header */}
-        <motion.div
+        <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -28,7 +28,7 @@ export default function DestinationsGrid() {
             <Globe size={14} className="text-blue-600" />
             <span>Global Study Destinations</span>
           </span>
-          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-display text-slate-900">
+          <h2 className="text-3xl sm:text-5xl font-black tracking-tight font-display text-slate-900">
             Explore 11 Premier Study Destinations
           </h2>
           <p className="text-slate-600 text-sm sm:text-base font-normal max-w-2xl mx-auto">
@@ -39,28 +39,31 @@ export default function DestinationsGrid() {
           <div className="flex justify-center gap-2 pt-4">
             <button
               onClick={() => setFilter('all')}
-              className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${filter === 'all'
-                  ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
+              className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                filter === 'all' 
+                  ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20' 
                   : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-                }`}
+              }`}
             >
               All 11 Destinations
             </button>
             <button
               onClick={() => setFilter('popular')}
-              className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${filter === 'popular'
-                  ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20'
+              className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                filter === 'popular' 
+                  ? 'bg-blue-600 text-white shadow-md shadow-blue-600/20' 
                   : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-                }`}
+              }`}
             >
               ⭐ Top 4 Popular
             </button>
             <button
               onClick={() => setFilter('budget')}
-              className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${filter === 'budget'
-                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20'
+              className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
+                filter === 'budget' 
+                  ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/20' 
                   : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-                }`}
+              }`}
             >
               💰 Low Budget / €0 Tuition
             </button>
@@ -83,13 +86,13 @@ export default function DestinationsGrid() {
               <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
               <div className="space-y-4">
-
+                
                 {/* Header Row */}
                 <div className="flex justify-between items-start">
                   <div className="flex items-center gap-3">
                     <span className="text-4xl">{c.flag}</span>
                     <div>
-                      <h3 className="text-xl font-extrabold text-slate-900 font-display group-hover:text-blue-600 transition-colors">
+                      <h3 className="text-xl font-black text-slate-900 font-display group-hover:text-blue-600 transition-colors">
                         {c.name}
                       </h3>
                       <span className="text-[10px] font-extrabold uppercase tracking-wider text-blue-600 bg-blue-50 px-2.5 py-0.5 rounded-md border border-blue-100 inline-block mt-0.5">
@@ -129,8 +132,8 @@ export default function DestinationsGrid() {
 
               {/* Action Button */}
               <div className="pt-2 border-t border-slate-100">
-                <a
-                  href="#contact"
+                <a 
+                  href="#contact" 
                   className="w-full py-3 px-4 rounded-2xl bg-slate-50 hover:bg-blue-600 hover:text-white border border-slate-200 hover:border-blue-600 text-slate-800 font-bold text-xs flex items-center justify-between transition-all group-hover:shadow-md cursor-pointer"
                 >
                   <span>Apply for {c.name}</span>

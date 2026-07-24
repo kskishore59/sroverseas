@@ -134,7 +134,7 @@ export default function EligibilityWizard() {
 
   return (
     <section id="wizard" className="py-24 relative bg-slate-50 border-y border-slate-200">
-      <div className="container mx-auto max-w-4xl">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
         <motion.div

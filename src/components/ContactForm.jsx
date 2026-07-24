@@ -1,232 +1,174 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Send, MessageSquare, CheckCircle, Sparkles, Clock } from 'lucide-react';
+import { motion } from 'framer-motion';
+import confetti from 'canvas-confetti';
+import { Phone, Mail, MapPin, MessageSquare, Send, CheckCircle2, Sparkles } from 'lucide-react';
+import CustomSelect from './CustomSelect';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     phone: '',
-    destination: '',
+    email: '',
+    country: 'germany',
+    qualification: 'bachelor',
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
-  const [lastSubmitTime, setLastSubmitTime] = useState(0);
-  const [rateLimitNotice, setRateLimitNotice] = useState('');
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.value]: e.target.value });
-  };
+  const countrySelectOptions = [
+    { value: 'germany', label: 'Germany 🇩🇪 (€0 Tuition)', icon: '🇩🇪' },
+    { value: 'canada', label: 'Canada 🇨🇦 (3Y PGWP)', icon: '🇨🇦' },
+    { value: 'uk', label: 'United Kingdom 🇬🇧 (1Y Master)', icon: '🇬🇧' },
+    { value: 'usa', label: 'United States 🇺🇸 (STEM OPT)', icon: '🇺🇸' },
+    { value: 'australia', label: 'Australia 🇦🇺 (PSW)', icon: '🇦🇺' },
+    { value: 'georgia', label: 'Georgia 🇬🇪 (MBBS)', icon: '🇬🇪' }
+  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.phone) {
-      alert('Please enter your full name and phone number.');
-      return;
-    }
-
-    // Rate Limiting Check (30 seconds cooldown between submissions)
-    const now = Date.now();
-    if (now - lastSubmitTime < 30000) {
-      const remainingSecs = Math.ceil((30000 - (now - lastSubmitTime)) / 1000);
-      setRateLimitNotice(`Consultation request already initiated! Please wait ${remainingSecs} seconds before submitting again to prevent duplicate bookings.`);
-      return;
-    }
-
-    setRateLimitNotice('');
-    setLastSubmitTime(now);
-
-    const text = `Hi SR Overseas! I would like to book a consultation.\n\n*Name*: ${formData.name}\n*Email*: ${formData.email}\n*Phone*: ${formData.phone}\n*Target Destination*: ${formData.destination}\n*Query*: ${formData.message}`;
-    const encodedText = encodeURIComponent(text);
-    const waUrl = `https://wa.me/917416007557?text=${encodedText}`;
-
-    window.open(waUrl, '_blank');
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
     setSubmitted(true);
   };
 
   return (
-    <section id="contact" className="py-24 relative bg-slate-50 border-t border-slate-200">
-      <div className="container mx-auto">
+    <section id="contact" className="py-24 relative bg-white border-t border-slate-200">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div className="bg-white p-8 sm:p-12 rounded-3xl border border-slate-200 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-10">
+          
+          {/* Left Column: Office Details */}
+          <div className="lg:col-span-5 space-y-6 text-left">
+            <span className="badge-tag">
+              <Sparkles size={14} className="text-blue-600" />
+              <span>Get In Touch</span>
+            </span>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <h2 className="text-3xl font-black font-display text-slate-900 leading-tight">
+              Start Your Global Study Journey Today
+            </h2>
 
-          {/* Left Panel: Contact Info & Map */}
-          <div className="lg:col-span-6 space-y-8">
+            <p className="text-xs sm:text-sm text-slate-600 font-normal leading-relaxed">
+              Book a 1-on-1 profile counselling session with our senior overseas education specialists at Medchal, Hyderabad.
+            </p>
 
-            <div className="space-y-4">
-              <span className="badge-tag">
-                <Sparkles size={14} className="text-blue-600" />
-                <span>Get in Touch</span>
-              </span>
-              <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-display text-slate-900">
-                Reserve Your Free Consultation Slot
-              </h2>
-              <p className="text-slate-600 text-base font-normal">
-                Book a 1-on-1 session with our expert education advisors in Medchal, Hyderabad or online.
-              </p>
-            </div>
-
-            {/* Details Cards */}
-            <div className="space-y-4">
-              <a
-                href="tel:+917416007557"
-                className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4 hover:border-blue-500 transition-colors group"
-              >
-                <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Phone size={22} />
-                </div>
+            <div className="space-y-4 text-xs font-semibold text-slate-800 pt-2">
+              <div className="flex items-start gap-3 p-3 bg-slate-50 rounded-2xl border border-slate-100">
+                <MapPin size={18} className="text-blue-600 mt-0.5" />
                 <div>
-                  <div className="text-xs text-slate-500 font-bold uppercase">Call / WhatsApp</div>
-                  <div className="text-base font-extrabold text-slate-900">+91 74160 07557</div>
+                  <div className="font-extrabold text-slate-900">Head Office Location</div>
+                  <div className="text-slate-500 text-[11px] font-normal mt-0.5">Medchal, Hyderabad, Telangana — 501401</div>
                 </div>
-              </a>
+              </div>
 
-              <a
-                href="mailto:srabroadconsultancy@gmail.com"
-                className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4 hover:border-blue-500 transition-colors group"
-              >
-                <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Mail size={22} />
-                </div>
+              <div className="flex items-start gap-3 p-3 bg-slate-50 rounded-2xl border border-slate-100">
+                <Phone size={18} className="text-blue-600 mt-0.5" />
                 <div>
-                  <div className="text-xs text-slate-500 font-bold uppercase">Email Support</div>
-                  <div className="text-base font-extrabold text-slate-900">srabroadconsultancy@gmail.com</div>
+                  <div className="font-extrabold text-slate-900">Direct Phone Support</div>
+                  <a href="tel:+917416007557" className="text-blue-600 text-[11px] hover:underline">+91 74160 07557</a>
                 </div>
-              </a>
+              </div>
 
-              <div className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center">
-                  <MapPin size={22} />
-                </div>
+              <div className="flex items-start gap-3 p-3 bg-slate-50 rounded-2xl border border-slate-100">
+                <Mail size={18} className="text-blue-600 mt-0.5" />
                 <div>
-                  <div className="text-xs text-slate-500 font-bold uppercase">Main Office Location</div>
-                  <div className="text-base font-extrabold text-slate-900">Medchal, Hyderabad, Telangana — 501401</div>
+                  <div className="font-extrabold text-slate-900">Email Query</div>
+                  <a href="mailto:srabroadconsultancy@gmail.com" className="text-slate-600 text-[11px] hover:underline">srabroadconsultancy@gmail.com</a>
                 </div>
               </div>
             </div>
 
-            {/* Google Map */}
-            <div className="bg-white overflow-hidden rounded-3xl border border-slate-200 shadow-sm h-60">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3802.2656936130675!2d78.48286657517069!3d17.63757078329284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTfCsDM4JzE1LjMiTiA3OMKwMjknMDcuNiJF!5e0!3m2!1sen!2sin!4v1783096206296!5m2!1sen!2sin"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                title="SR Overseas Office Map"
-              />
-            </div>
-
+            <a 
+              href="https://wa.me/917416007557" 
+              target="_blank" 
+              rel="noreferrer"
+              className="btn-primary w-full py-3.5 bg-[#25D366] hover:bg-[#20ba5a] text-white shadow-emerald-600/20 text-xs flex items-center justify-center gap-2"
+            >
+              <MessageSquare size={16} />
+              <span>Direct WhatsApp Counselling</span>
+            </a>
           </div>
 
-          {/* Right Panel: Form Card */}
-          <div className="lg:col-span-6">
-            <div className="bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-xl space-y-6">
-
-              <div className="border-b border-slate-100 pb-4">
-                <h3 className="text-2xl font-extrabold text-slate-900 font-display">Book Free Consultation</h3>
-                <p className="text-xs text-slate-500 font-medium">Fill in details to connect directly via WhatsApp</p>
+          {/* Right Column: Form */}
+          <div className="lg:col-span-7">
+            {submitted ? (
+              <div className="p-8 bg-emerald-50 rounded-3xl border border-emerald-200 text-center space-y-4">
+                <CheckCircle2 size={48} className="text-emerald-600 mx-auto" />
+                <h3 className="text-2xl font-black text-slate-900 font-display">Consultation Request Received!</h3>
+                <p className="text-slate-600 text-xs font-normal">
+                  Thank you, <strong>{formData.name}</strong>. Our senior counselor will reach out to you on <strong>{formData.phone}</strong> within 2 hours.
+                </p>
               </div>
-
-              {rateLimitNotice && (
-                <div className="p-3.5 bg-amber-50 rounded-2xl border border-amber-200 text-amber-800 text-xs font-bold flex items-center gap-2">
-                  <Clock size={16} className="text-amber-600 flex-shrink-0" />
-                  <span>{rateLimitNotice}</span>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-4 text-left text-xs">
+                <div>
+                  <label className="block text-slate-700 font-bold mb-1">Full Name *</label>
+                  <input 
+                    type="text" 
+                    required
+                    placeholder="Enter your full name"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
+                  />
                 </div>
-              )}
 
-              {submitted ? (
-                <div className="p-8 text-center space-y-4">
-                  <CheckCircle size={48} className="text-emerald-600 mx-auto" />
-                  <h4 className="text-xl font-bold text-slate-900 font-display">Enquiry Initiated!</h4>
-                  <p className="text-xs text-slate-600">
-                    Thank you! Our senior study abroad counselor will review your profile and respond within 24 hours.
-                  </p>
-                  <button
-                    onClick={() => setSubmitted(false)}
-                    className="btn-outline text-xs px-6 py-2.5"
-                  >
-                    Submit Another Query
-                  </button>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-slate-700 font-bold mb-1">Phone Number (WhatsApp) *</label>
+                    <input 
+                      type="tel" 
+                      required
+                      placeholder="+91 98765 43210"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-slate-700 font-bold mb-1">Email Address *</label>
+                    <input 
+                      type="email" 
+                      required
+                      placeholder="student@gmail.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
+                    />
+                  </div>
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-4 text-xs">
-                  <div>
-                    <label className="block text-slate-700 font-bold mb-1">Full Name *</label>
-                    <input
-                      type="text"
-                      name="name"
-                      required
-                      placeholder="e.g. Rahul Sharma"
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
-                    />
-                  </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-slate-700 font-bold mb-1">Email Address *</label>
-                      <input
-                        type="email"
-                        name="email"
-                        required
-                        placeholder="rahul@example.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-slate-700 font-bold mb-1">Phone / WhatsApp Number *</label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        required
-                        placeholder="+91 98765 43210"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
-                      />
-                    </div>
-                  </div>
+                <CustomSelect 
+                  label="Target Destination"
+                  options={countrySelectOptions}
+                  value={formData.country}
+                  onChange={(val) => setFormData({ ...formData, country: val })}
+                />
 
-                  <div>
-                    <label className="block text-slate-700 font-bold mb-1">Preferred Destination *</label>
-                    <input
-                      type="text"
-                      name="destination"
-                      required
-                      placeholder="e.g. Germany / Canada / UK / USA"
-                      value={formData.destination}
-                      onChange={(e) => setFormData({ ...formData, destination: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
-                    />
-                  </div>
+                <div>
+                  <label className="block text-slate-700 font-bold mb-1">Tell Us About Your Profile / Query</label>
+                  <textarea 
+                    rows={3}
+                    placeholder="Degree, GPA, IELTS score, target intake..."
+                    value={formData.message}
+                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-600 font-medium resize-none"
+                  />
+                </div>
 
-                  <div>
-                    <label className="block text-slate-700 font-bold mb-1">Message or Query Details</label>
-                    <textarea
-                      name="message"
-                      rows={3}
-                      placeholder="Specify your academic background, preferred course or budget limits..."
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    className="btn-primary w-full py-4 text-sm font-bold bg-[#25D366] hover:bg-[#20ba5a] shadow-emerald-600/20"
-                  >
-                    <MessageSquare size={18} />
-                    <span>Send Consultation Request via WhatsApp</span>
-                  </button>
-                </form>
-              )}
-
-            </div>
+                <button 
+                  type="submit"
+                  className="btn-primary w-full py-4 text-sm font-bold shadow-lg shadow-blue-600/25 cursor-pointer"
+                >
+                  <Send size={16} />
+                  <span>Book Free Consultation</span>
+                </button>
+              </form>
+            )}
           </div>
 
         </div>
