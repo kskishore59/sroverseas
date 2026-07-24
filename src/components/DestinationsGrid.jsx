@@ -14,7 +14,7 @@ export default function DestinationsGrid() {
 
   return (
     <section id="countries" className="py-24 relative bg-white border-t border-slate-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="container mx-auto">
         
         {/* Header */}
         <motion.div 
