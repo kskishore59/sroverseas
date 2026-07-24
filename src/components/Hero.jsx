@@ -81,8 +81,7 @@ export default function Hero() {
       let globeCenterX = width * 0.75;
       let globeCenterY = height * 0.5;
       const isDesktop = width >= 1024;
-      // SIGNIFICANTLY INCREASED GLOBE RADIUS: 430px on desktop
-      const globeRadius = isDesktop ? 330 : Math.min(width, height) * 0.33;
+      const globeRadius = isDesktop ? 430 : Math.min(width, height) * 0.44;
 
       if (isDesktop && cardRef.current && canvas) {
         const cardRect = cardRef.current.getBoundingClientRect();
@@ -192,10 +191,10 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-[92vh] pt-8 pb-20 flex items-center overflow-hidden bg-gradient-to-b from-blue-50/60 via-white to-slate-50 bg-grid-pattern">
-
+    <section id="home" className="relative min-h-[92vh] pt-8 pb-20 flex items-center overflow-hidden bg-gradient-to-b from-blue-50/70 via-indigo-50/20 to-white">
+      
       {/* Background 3D Globe Canvas */}
-      <div className="absolute inset-0 max-h-full w-full ml-20 overflow-hidden pointer-events-none z-0">
+      <div className="absolute inset-0 max-h-full w-full overflow-hidden pointer-events-none z-0">
         <canvas ref={canvasRef} className="w-full h-full" />
       </div>
 
@@ -205,15 +204,15 @@ export default function Hero() {
 
       {/* Enforced max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 for perfect widescreen alignment */}
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
+        
         {/* Left Column: Hero Copy */}
-        <motion.div
+        <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="lg:col-span-7 space-y-6 text-left"
         >
-
+          
           <div className="badge-tag">
             <Sparkles size={14} className="text-blue-600 animate-spin" />
             <span>Study Abroad Consultancy • Hyderabad</span>
@@ -246,13 +245,13 @@ export default function Hero() {
               <Plane size={14} className="text-blue-600" />
               <span>Live Departure Hubs</span>
             </div>
-
+            
             <div className="flex flex-wrap items-center gap-2">
               <motion.div whileHover={{ scale: 1.05 }} className="px-3.5 py-2 rounded-2xl bg-white border border-slate-200 shadow-sm text-xs font-bold text-slate-800 flex items-center gap-2 font-mono">
                 <span className="text-blue-600">HYD ✈️ MUC</span>
                 <span className="text-[10px] text-emerald-700 font-extrabold bg-emerald-50 px-2 py-0.5 rounded-md font-sans">Germany €0 Tuition</span>
               </motion.div>
-
+              
               <motion.div whileHover={{ scale: 1.05 }} className="px-3.5 py-2 rounded-2xl bg-white border border-slate-200 shadow-sm text-xs font-bold text-slate-800 flex items-center gap-2 font-mono">
                 <span className="text-blue-600">HYD ✈️ YVR</span>
                 <span className="text-[10px] text-blue-700 font-extrabold bg-blue-50 px-2 py-0.5 rounded-md font-sans">Canada 3Y PGWP</span>
@@ -268,7 +267,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Right Column: Visual Photo Card Aligned DEAD CENTER on Globe with 3D Tilt */}
-        <motion.div
+        <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -285,16 +284,16 @@ export default function Hero() {
             }}
             className="relative glass-panel-glow p-5 space-y-4 bg-white/90 backdrop-blur-2xl border border-slate-200 shadow-2xl rounded-3xl cursor-grab active:cursor-grabbing hover:border-blue-400 transition-colors duration-300"
           >
-
+            
             {/* Visual Student Frame */}
             <div className="relative rounded-2xl overflow-hidden h-76 border border-slate-200 shadow-inner">
-              <img
-                src="/assets/students-hero.png"
-                alt="International Students"
+              <img 
+                src="/assets/students-hero.png" 
+                alt="International Students" 
                 className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
-
+              
               <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center">
                 <div className="bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-emerald-500/30 text-emerald-700 text-xs font-extrabold flex items-center gap-1.5 shadow-md">
                   <ShieldCheck size={16} className="text-emerald-600" />
@@ -316,7 +315,7 @@ export default function Hero() {
             </div>
 
             {/* Interactive 3D Floating Parallax Badge */}
-            <motion.div
+            <motion.div 
               style={{
                 x: badgeTranslateX,
                 y: badgeTranslateY,

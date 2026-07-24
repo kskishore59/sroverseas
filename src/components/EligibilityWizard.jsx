@@ -36,7 +36,6 @@ export default function EligibilityWizard() {
 
     const countryObj = countriesData.find((c) => c.id === targetCountry) || countriesData[0];
     
-    let chanceScore = 85;
     let chanceCategory = 'High Admit Probability (92%)';
     let scholarship = countryObj.scholarship;
     let MatchedUnivs = [];
@@ -157,8 +156,8 @@ export default function EligibilityWizard() {
           </p>
         </motion.div>
 
-        {/* Wizard Card Container */}
-        <div className="bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-xl relative overflow-hidden">
+        {/* Wizard Card Container with Glowing Border Halo */}
+        <div className="bg-white p-8 sm:p-10 rounded-3xl border border-blue-500/20 shadow-[0_0_30px_rgba(37,99,235,0.08)] hover:shadow-[0_0_40px_rgba(37,99,235,0.15)] hover:border-blue-500/40 transition-all duration-300 relative overflow-hidden">
           
           {/* Progress Step Indicator */}
           <div className="flex justify-between items-center mb-8 border-b border-slate-100 pb-4 text-xs font-bold">
@@ -183,8 +182,8 @@ export default function EligibilityWizard() {
                       onClick={() => setEducation(item.id)}
                       className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
                         education === item.id 
-                          ? 'bg-blue-50 border-blue-500 text-blue-900 shadow-sm' 
-                          : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300'
+                          ? 'bg-blue-50/80 border-blue-500 text-blue-900 shadow-[0_0_15px_rgba(37,99,235,0.2)]' 
+                          : 'bg-white border-slate-200 text-slate-600 hover:border-blue-300'
                       }`}
                     >
                       <div className="font-extrabold text-slate-900">{item.label}</div>
@@ -250,7 +249,7 @@ export default function EligibilityWizard() {
                 </button>
                 <button 
                   onClick={handleEvaluate}
-                  className="btn-primary flex-1 py-3.5 bg-emerald-600 hover:bg-emerald-500 shadow-emerald-600/20 cursor-pointer"
+                  className="btn-primary flex-1 py-3.5 bg-emerald-600 hover:bg-emerald-500 shadow-[0_0_25px_rgba(5,150,105,0.35)] cursor-pointer"
                 >
                   <Sparkles size={16} />
                   <span>Evaluate Admit Chance</span>
@@ -259,32 +258,32 @@ export default function EligibilityWizard() {
             </div>
           )}
 
-          {/* STEP 3 (4): DETAILED DATA-DRIVEN RESULT CARD */}
+          {/* STEP 3 (4): DETAILED DATA-DRIVEN RESULT CARD WITH EMERALD GLOW */}
           {step === 4 && result && (
             <div className="space-y-6 animate-fade-in text-xs">
               <div className="text-center space-y-2">
-                <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto border border-emerald-200 shadow-sm">
+                <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto border border-emerald-300 shadow-[0_0_25px_rgba(16,185,129,0.3)]">
                   <CheckCircle2 size={36} />
                 </div>
                 <h3 className="text-2xl font-black text-slate-900 font-display">
                   {result.flag} {result.countryName} Official Evaluation Complete
                 </h3>
-                <div className="inline-block px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 font-extrabold text-sm">
+                <div className="inline-block px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-700 font-extrabold text-sm shadow-[0_0_15px_rgba(16,185,129,0.2)]">
                   {result.chanceCategory}
                 </div>
               </div>
 
-              {/* Data Breakdown Grid */}
+              {/* Data Breakdown Grid with Glowing Borders */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left pt-2">
-                <div className="p-4 bg-amber-50/60 rounded-2xl border border-amber-200 space-y-1">
+                <div className="p-4 bg-amber-50/70 rounded-2xl border border-amber-300 shadow-[0_0_15px_rgba(217,119,6,0.15)] space-y-1">
                   <div className="text-amber-800 font-bold flex items-center gap-1.5"><Award size={14} /> Scholarship Match</div>
                   <div className="font-extrabold text-slate-900 text-xs">{result.scholarship}</div>
                 </div>
-                <div className="p-4 bg-emerald-50/60 rounded-2xl border border-emerald-200 space-y-1">
+                <div className="p-4 bg-emerald-50/70 rounded-2xl border border-emerald-300 shadow-[0_0_15px_rgba(5,150,105,0.15)] space-y-1">
                   <div className="text-emerald-800 font-bold flex items-center gap-1.5"><GraduationCap size={14} /> Tuition Cost</div>
                   <div className="font-extrabold text-slate-900 text-xs">{result.tuition}</div>
                 </div>
-                <div className="p-4 bg-blue-50/60 rounded-2xl border border-blue-200 space-y-1">
+                <div className="p-4 bg-blue-50/70 rounded-2xl border border-blue-300 shadow-[0_0_15px_rgba(37,99,235,0.15)] space-y-1">
                   <div className="text-blue-800 font-bold flex items-center gap-1.5"><ShieldCheck size={14} /> Post-Study Visa</div>
                   <div className="font-extrabold text-slate-900 text-xs">{result.pswVisa}</div>
                 </div>
@@ -298,7 +297,7 @@ export default function EligibilityWizard() {
                 </div>
                 <div className="flex flex-wrap gap-2 pt-1">
                   {result.MatchedUnivs.map((u, i) => (
-                    <span key={i} className="px-3 py-1 bg-white border border-slate-200 rounded-xl font-bold text-slate-800 shadow-xs">
+                    <span key={i} className="px-3 py-1 bg-white border border-blue-200/80 rounded-xl font-bold text-slate-800 shadow-xs">
                       🏛️ {u}
                     </span>
                   ))}
@@ -325,7 +324,7 @@ export default function EligibilityWizard() {
               <div className="flex flex-wrap gap-4 pt-4">
                 <a 
                   href="#contact" 
-                  className="btn-primary flex-1 py-4 text-sm"
+                  className="btn-primary flex-1 py-4 text-sm shadow-[0_0_25px_rgba(37,99,235,0.4)]"
                 >
                   Claim Scholarship & Apply Now
                 </a>
