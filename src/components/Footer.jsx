@@ -8,7 +8,7 @@ export default function Footer() {
 
   return (
     <footer className="bg-slate-950 text-slate-400 pt-16 pb-12 border-t border-slate-900 text-xs">
-      <div className="container mx-auto space-y-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Top Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
@@ -63,7 +63,7 @@ export default function Footer() {
               <li><a href="#budget-calculator" className="hover:text-white transition-colors">Low-Budget Calculator</a></li>
               <li><a href="#loan-calculator" className="hover:text-white transition-colors">Education Loan Estimator</a></li>
               <li><a href="#services" className="hover:text-white transition-colors">Career Counselling & SOP</a></li>
-              <li><a href="#process" className="hover:text-white transition-colors">9-Step Enrollment Path</a></li>
+              <li><a href="#process" className="hover:text-white transition-colors">9-Step Roadmap Deck</a></li>
               <li><a href="#universities" className="hover:text-white transition-colors">500+ Partner Universities</a></li>
             </ul>
           </div>

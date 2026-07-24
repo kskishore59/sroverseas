@@ -19,8 +19,8 @@ export default function Navbar({ theme, toggleTheme }) {
   return (
     <>
       {/* Top Support Strip */}
-      <div className="bg-slate-900 text-slate-200 text-[11px] py-1.5 px-4 border-b border-slate-800">
-        <div className="container mx-auto flex justify-between items-center">
+      <div className="bg-slate-900 text-slate-200 text-[11px] py-1.5 border-b border-slate-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
           <div className="flex items-center gap-4">
             <a href="tel:+917416007557" className="flex items-center gap-1.5 hover:text-blue-400 transition-colors font-medium">
               <Phone size={12} className="text-blue-400" />
@@ -33,7 +33,7 @@ export default function Navbar({ theme, toggleTheme }) {
           </div>
           <div className="flex items-center gap-3">
             <span className="hidden sm:inline text-slate-400">Office Hours: Mon - Sat 9:30 AM - 6:30 PM</span>
-            <button
+            <button 
               onClick={toggleTheme}
               className="p-1 rounded-full hover:bg-slate-800 text-slate-300 transition-colors cursor-pointer"
               title="Toggle Theme"
@@ -44,31 +44,39 @@ export default function Navbar({ theme, toggleTheme }) {
         </div>
       </div>
 
-      {/* Floating Modern Pill Navbar */}
+      {/* Floating Modern Pill Navbar Header */}
       <header className="sticky top-3 z-50 px-3 sm:px-4 transition-all duration-300">
-        <div className={`max-w-7xl mx-auto rounded-full transition-all duration-300 border ${scrolled
-          ? 'bg-white/95 backdrop-blur-xl shadow-xl border-slate-200/90 py-2 px-5'
-          : 'bg-white/90 backdrop-blur-md shadow-md border-slate-200/80 py-2.5 px-5'
-          }`}>
+        <div className={`max-w-7xl mx-auto rounded-full transition-all duration-300 border ${
+          scrolled 
+            ? 'bg-white/95 backdrop-blur-xl shadow-xl border-slate-200/90 py-2 px-6' 
+            : 'bg-white/90 backdrop-blur-md shadow-md border-slate-200/80 py-2.5 px-6'
+        }`}>
           <div className="flex items-center justify-between">
-
+            
             {/* Official Logo Brand Container */}
             <a href="#home" className="flex items-center gap-3 group">
-              <div className="h-14 w-auto flex items-center justify-center">
-                <img
-                  src="/assets/logo.png"
-                  alt="SR Overseas Education Logo"
-                  className="h-14 w-auto mb-1 object-contain group-hover:scale-105 transition-transform"
+              <div className="h-10 w-auto flex items-center justify-center">
+                <img 
+                  src="/assets/logo.png" 
+                  alt="SR Overseas Education Logo" 
+                  className="h-9 w-auto object-contain group-hover:scale-105 transition-transform"
                 />
               </div>
-
+              <div className="flex flex-col">
+                <span className="font-extrabold text-sm sm:text-base tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors leading-none">
+                  SR OVERSEAS
+                </span>
+                <span className="text-[9px] tracking-widest uppercase font-black text-blue-600 mt-0.5">
+                  Education Consultancy
+                </span>
+              </div>
             </a>
 
-            {/* Simplified 4 Nav Items */}
+            {/* 4 Nav Dropdown Categories */}
             <nav className="hidden lg:flex items-center gap-2 font-bold text-xs text-slate-700">
-
+              
               {/* 1. Destinations Mega Dropdown */}
-              <div
+              <div 
                 className="relative"
                 onMouseEnter={() => setActiveDropdown('destinations')}
                 onMouseLeave={() => setActiveDropdown(null)}
@@ -86,7 +94,7 @@ export default function Navbar({ theme, toggleTheme }) {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.98 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute top-full left-0 mt-2 w-[420px] bg-white p-4 rounded-3xl border border-slate-200 shadow-2xl grid grid-cols-2 gap-2 text-xs"
+                      className="absolute top-full left-0 mt-2 w-[420px] bg-white p-4 rounded-3xl border border-slate-200 shadow-2xl grid grid-cols-2 gap-2 text-xs z-50"
                     >
                       <a href="#countries" className="p-2.5 hover:bg-blue-50 rounded-2xl transition-colors flex items-center gap-2.5 border border-transparent hover:border-blue-100">
                         <span className="text-lg">🇨🇦</span>
@@ -136,7 +144,7 @@ export default function Navbar({ theme, toggleTheme }) {
               </div>
 
               {/* 2. Financial Suite Dropdown */}
-              <div
+              <div 
                 className="relative"
                 onMouseEnter={() => setActiveDropdown('finance')}
                 onMouseLeave={() => setActiveDropdown(null)}
@@ -154,7 +162,7 @@ export default function Navbar({ theme, toggleTheme }) {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.98 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute top-full left-0 mt-2 w-64 bg-white p-3 rounded-3xl border border-slate-200 shadow-2xl space-y-1 text-xs"
+                      className="absolute top-full left-0 mt-2 w-64 bg-white p-3 rounded-3xl border border-slate-200 shadow-2xl space-y-1 text-xs z-50"
                     >
                       <a href="#budget-calculator" className="p-2.5 hover:bg-blue-50 rounded-2xl transition-colors block font-extrabold text-slate-900">
                         <div>💰 Low-Budget Calculator</div>
@@ -170,7 +178,7 @@ export default function Navbar({ theme, toggleTheme }) {
               </div>
 
               {/* 3. Services & Process Dropdown */}
-              <div
+              <div 
                 className="relative"
                 onMouseEnter={() => setActiveDropdown('services')}
                 onMouseLeave={() => setActiveDropdown(null)}
@@ -188,7 +196,7 @@ export default function Navbar({ theme, toggleTheme }) {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.98 }}
                       transition={{ duration: 0.15 }}
-                      className="absolute top-full left-0 mt-2 w-64 bg-white p-3 rounded-3xl border border-slate-200 shadow-2xl space-y-1 text-xs"
+                      className="absolute top-full left-0 mt-2 w-64 bg-white p-3 rounded-3xl border border-slate-200 shadow-2xl space-y-1 text-xs z-50"
                     >
                       <a href="#services" className="p-2.5 hover:bg-purple-50 rounded-2xl transition-colors block font-extrabold text-slate-900">
                         <div>📚 Comprehensive Services</div>
@@ -196,7 +204,7 @@ export default function Navbar({ theme, toggleTheme }) {
                       </a>
                       <a href="#process" className="p-2.5 hover:bg-blue-50 rounded-2xl transition-colors block font-extrabold text-slate-900">
                         <div>🗺️ 9-Step Roadmap Deck</div>
-                        <div className="text-[10px] text-blue-600 font-bold mt-0.5">Scroll-driven enrollment path</div>
+                        <div className="text-[10px] text-blue-600 font-bold mt-0.5">Interactive enrollment roadmap</div>
                       </a>
                     </motion.div>
                   )}
@@ -212,7 +220,7 @@ export default function Navbar({ theme, toggleTheme }) {
 
             {/* Right Action & Search */}
             <div className="hidden sm:flex items-center gap-2">
-              <button
+              <button 
                 onClick={() => setSearchOpen(!searchOpen)}
                 className="p-2 rounded-full hover:bg-slate-100 text-slate-600 transition-colors border border-slate-200 cursor-pointer"
                 title="Search Site"
@@ -227,7 +235,7 @@ export default function Navbar({ theme, toggleTheme }) {
             </div>
 
             {/* Mobile Menu Toggle */}
-            <button
+            <button 
               onClick={() => setMobileOpen(!mobileOpen)}
               className="lg:hidden p-2 rounded-full border border-slate-200 text-slate-700 hover:bg-slate-100 cursor-pointer"
             >
@@ -240,7 +248,7 @@ export default function Navbar({ theme, toggleTheme }) {
       {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
+          <motion.div 
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -282,9 +290,9 @@ export default function Navbar({ theme, toggleTheme }) {
               </div>
               <button onClick={() => setSearchOpen(false)} className="text-slate-400 hover:text-slate-900 font-bold cursor-pointer">×</button>
             </div>
-
-            <input
-              type="text"
+            
+            <input 
+              type="text" 
               placeholder="Search Germany zero tuition, Canada PGWP, UK admissions..."
               autoFocus
               className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-blue-600 font-medium"

@@ -13,10 +13,10 @@ export default function Hero() {
   const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
   const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
 
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['12deg', '-12deg']);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-12deg', '12deg']);
-  const badgeTranslateX = useTransform(mouseXSpring, [-0.5, 0.5], [-15, 15]);
-  const badgeTranslateY = useTransform(mouseYSpring, [-0.5, 0.5], [-15, 15]);
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ['10deg', '-10deg']);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ['-10deg', '10deg']);
+  const badgeTranslateX = useTransform(mouseXSpring, [-0.5, 0.5], [-12, 12]);
+  const badgeTranslateY = useTransform(mouseYSpring, [-0.5, 0.5], [-12, 12]);
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
@@ -54,15 +54,7 @@ export default function Hero() {
     };
     window.addEventListener('resize', handleResize);
 
-    // 3D Globe Wireframe Parameters - Precisely aligned behind right photo card on desktop
-    let globeRotation = 0;
-    const isDesktop = width > 768;
-    const globeRadius = isDesktop ? Math.min(width, height) * 0.44 : Math.min(width, height) * 0.32;
-    // Align globe center directly behind the right col (lg:col-span-5 ~ 78% width)
-    const globeCenterX = isDesktop ? width * 0.77 : width * 0.5;
-    const globeCenterY = isDesktop ? height * 0.5 : height * 0.7;
-
-    // Flight Beacons (Global Coordinates mapped onto 3D Sphere)
+    // Flight Beacons
     const beacons = [
       { name: 'Munich 🇩🇪', lat: 0.4, lon: 0.2 },
       { name: 'Vancouver 🇨🇦', lat: -0.3, lon: 1.2 },
@@ -80,8 +72,26 @@ export default function Hero() {
       radius: Math.random() * 2 + 1
     }));
 
+    let globeRotation = 0;
+
     const render = () => {
       ctx.clearRect(0, 0, width, height);
+
+      // DYNAMIC GLOBE CENTER POS: Calculate directly from cardRef bounding rect
+      let globeCenterX = width * 0.75;
+      let globeCenterY = height * 0.5;
+      const isDesktop = width >= 1024;
+      const globeRadius = isDesktop ? 310 : Math.min(width, height) * 0.35;
+
+      if (isDesktop && cardRef.current && canvas) {
+        const cardRect = cardRef.current.getBoundingClientRect();
+        const canvasRect = canvas.getBoundingClientRect();
+        globeCenterX = cardRect.left + cardRect.width / 2 - canvasRect.left;
+        globeCenterY = cardRect.top + cardRect.height / 2 - canvasRect.top;
+      } else if (!isDesktop) {
+        globeCenterX = width * 0.5;
+        globeCenterY = height * 0.5;
+      }
 
       // Render 3D Rotating Globe Wireframe Ring
       globeRotation += 0.004;
@@ -96,7 +106,7 @@ export default function Hero() {
 
         ctx.beginPath();
         ctx.ellipse(0, yPos, r, r * 0.35, 0, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(37, 99, 235, 0.16)';
+        ctx.strokeStyle = 'rgba(37, 99, 235, 0.18)';
         ctx.lineWidth = 1.2;
         ctx.stroke();
       }
@@ -108,7 +118,7 @@ export default function Hero() {
 
         ctx.beginPath();
         ctx.ellipse(0, 0, rx, globeRadius, 0, 0, Math.PI * 2);
-        ctx.strokeStyle = 'rgba(79, 70, 229, 0.14)';
+        ctx.strokeStyle = 'rgba(79, 70, 229, 0.15)';
         ctx.lineWidth = 1.2;
         ctx.stroke();
       }
@@ -116,7 +126,7 @@ export default function Hero() {
       // Draw Outer Rim Glow Ring
       ctx.beginPath();
       ctx.arc(0, 0, globeRadius, 0, Math.PI * 2);
-      ctx.strokeStyle = 'rgba(37, 99, 235, 0.32)';
+      ctx.strokeStyle = 'rgba(37, 99, 235, 0.35)';
       ctx.lineWidth = 2;
       ctx.stroke();
 
@@ -181,27 +191,28 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="home" className="relative min-h-[92vh] pt-8 pb-20 flex items-center overflow-hidden bg-gradient-to-b from-blue-50/60 via-white to-slate-50 bg-grid-pattern">
-
+    <section id="home" className="relative min-h-[90vh] pt-8 pb-20 flex items-center overflow-hidden bg-gradient-to-b from-blue-50/60 via-white to-slate-50 bg-grid-pattern">
+      
       {/* Background 3D Globe Canvas */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <canvas ref={canvasRef} className="w-full h-full" />
       </div>
 
-      {/* Aurora Wave Light Spotlights */}
+      {/* Aurora Light Spotlights */}
       <div className="absolute top-1/4 left-1/6 w-[600px] h-[600px] bg-blue-400/15 rounded-full blur-[140px] pointer-events-none aurora-blob-1" />
       <div className="absolute bottom-1/4 right-1/6 w-[600px] h-[600px] bg-indigo-400/15 rounded-full blur-[140px] pointer-events-none aurora-blob-2" />
 
-      <div className="container mx-auto relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-
+      {/* Enforced max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 for perfect widescreen alignment */}
+      <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        
         {/* Left Column: Hero Copy */}
-        <motion.div
+        <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="lg:col-span-7 space-y-6 text-left"
         >
-
+          
           <div className="badge-tag">
             <Sparkles size={14} className="text-blue-600 animate-spin" />
             <span>Study Abroad Consultancy • Hyderabad</span>
@@ -234,13 +245,13 @@ export default function Hero() {
               <Plane size={14} className="text-blue-600" />
               <span>Live Departure Hubs</span>
             </div>
-
+            
             <div className="flex flex-wrap items-center gap-2">
               <motion.div whileHover={{ scale: 1.05 }} className="px-3.5 py-2 rounded-2xl bg-white border border-slate-200 shadow-sm text-xs font-bold text-slate-800 flex items-center gap-2 font-mono">
                 <span className="text-blue-600">HYD ✈️ MUC</span>
                 <span className="text-[10px] text-emerald-700 font-extrabold bg-emerald-50 px-2 py-0.5 rounded-md font-sans">Germany €0 Tuition</span>
               </motion.div>
-
+              
               <motion.div whileHover={{ scale: 1.05 }} className="px-3.5 py-2 rounded-2xl bg-white border border-slate-200 shadow-sm text-xs font-bold text-slate-800 flex items-center gap-2 font-mono">
                 <span className="text-blue-600">HYD ✈️ YVR</span>
                 <span className="text-[10px] text-blue-700 font-extrabold bg-blue-50 px-2 py-0.5 rounded-md font-sans">Canada 3Y PGWP</span>
@@ -256,11 +267,11 @@ export default function Hero() {
         </motion.div>
 
         {/* Right Column: Visual Photo Card Aligned DEAD CENTER on Globe with 3D Tilt */}
-        <motion.div
+        <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="lg:col-span-5 relative perspective-1000 lg:m-40 w-full"
+          className="lg:col-span-5 relative perspective-1000"
         >
           <motion.div
             ref={cardRef}
@@ -271,18 +282,18 @@ export default function Hero() {
               rotateY,
               transformStyle: 'preserve-3d'
             }}
-            className="relative glass-panel-glow p-5 space-y-6 bg-white/90 backdrop-blur-2xl border border-slate-200 shadow-2xl rounded-3xl cursor-grab active:cursor-grabbing hover:border-blue-400 transition-colors duration-300"
+            className="relative glass-panel-glow p-5 space-y-4 bg-white/90 backdrop-blur-2xl border border-slate-200 shadow-2xl rounded-3xl cursor-grab active:cursor-grabbing hover:border-blue-400 transition-colors duration-300"
           >
-
+            
             {/* Visual Student Frame */}
-            <div className="relative rounded-2xl overflow-hidden h-72 border border-slate-200 shadow-inner">
-              <img
-                src="/assets/students-hero.png"
-                alt="International Students"
+            <div className="relative rounded-2xl overflow-hidden h-76 border border-slate-200 shadow-inner">
+              <img 
+                src="/assets/students-hero.png" 
+                alt="International Students" 
                 className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
-
+              
               <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center">
                 <div className="bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-emerald-500/30 text-emerald-700 text-xs font-extrabold flex items-center gap-1.5 shadow-md">
                   <ShieldCheck size={16} className="text-emerald-600" />
@@ -304,7 +315,7 @@ export default function Hero() {
             </div>
 
             {/* Interactive 3D Floating Parallax Badge */}
-            <motion.div
+            <motion.div 
               style={{
                 x: badgeTranslateX,
                 y: badgeTranslateY,
