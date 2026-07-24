@@ -322,7 +322,7 @@ export default function Hero() {
                 y: badgeTranslateY,
                 translateZ: 40
               }}
-              className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl border border-slate-200 shadow-2xl flex items-center gap-3 animate-float-slow z-20"
+              className="absolute -top-8 -right-6 bg-white p-4 rounded-2xl border border-slate-200 shadow-2xl flex items-center gap-3 animate-float-slow z-20"
             >
               <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
                 <Award size={20} />

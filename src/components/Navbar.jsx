@@ -33,7 +33,7 @@ export default function Navbar({ theme, toggleTheme }) {
           </div>
           <div className="flex items-center gap-3">
             <span className="hidden sm:inline text-slate-400">Office Hours: Mon - Sat 9:30 AM - 6:30 PM</span>
-            <button 
+            <button
               onClick={toggleTheme}
               className="p-1 rounded-full hover:bg-slate-800 text-slate-300 transition-colors cursor-pointer"
               title="Toggle Theme"
@@ -46,37 +46,29 @@ export default function Navbar({ theme, toggleTheme }) {
 
       {/* Floating Modern Pill Navbar Header */}
       <header className="sticky top-3 z-50 px-3 sm:px-4 transition-all duration-300">
-        <div className={`max-w-7xl mx-auto rounded-full transition-all duration-300 border ${
-          scrolled 
-            ? 'bg-white/95 backdrop-blur-xl shadow-xl border-slate-200/90 py-2 px-6' 
-            : 'bg-white/90 backdrop-blur-md shadow-md border-slate-200/80 py-2.5 px-6'
-        }`}>
+        <div className={`max-w-7xl mx-auto rounded-full transition-all duration-300 border ${scrolled
+          ? 'bg-white/95 backdrop-blur-xl shadow-xl border-slate-200/90 py-2 px-6'
+          : 'bg-white/90 backdrop-blur-md shadow-md border-slate-200/80 py-2.5 px-6'
+          }`}>
           <div className="flex items-center justify-between">
-            
+
             {/* Official Logo Brand Container */}
             <a href="#home" className="flex items-center gap-3 group">
               <div className="h-10 w-auto flex items-center justify-center">
-                <img 
-                  src="/assets/logo.png" 
-                  alt="SR Overseas Education Logo" 
-                  className="h-9 w-auto object-contain group-hover:scale-105 transition-transform"
+                <img
+                  src="/assets/logo.png"
+                  alt="SR Overseas Education Logo"
+                  className="h-16 mb-2 w-auto object-contain group-hover:scale-105 transition-transform"
                 />
               </div>
-              <div className="flex flex-col">
-                <span className="font-extrabold text-sm sm:text-base tracking-tight text-slate-900 group-hover:text-blue-600 transition-colors leading-none">
-                  SR OVERSEAS
-                </span>
-                <span className="text-[9px] tracking-widest uppercase font-black text-blue-600 mt-0.5">
-                  Education Consultancy
-                </span>
-              </div>
+
             </a>
 
             {/* 4 Nav Dropdown Categories */}
             <nav className="hidden lg:flex items-center gap-2 font-bold text-xs text-slate-700">
-              
+
               {/* 1. Destinations Mega Dropdown */}
-              <div 
+              <div
                 className="relative"
                 onMouseEnter={() => setActiveDropdown('destinations')}
                 onMouseLeave={() => setActiveDropdown(null)}
@@ -144,7 +136,7 @@ export default function Navbar({ theme, toggleTheme }) {
               </div>
 
               {/* 2. Financial Suite Dropdown */}
-              <div 
+              <div
                 className="relative"
                 onMouseEnter={() => setActiveDropdown('finance')}
                 onMouseLeave={() => setActiveDropdown(null)}
@@ -178,7 +170,7 @@ export default function Navbar({ theme, toggleTheme }) {
               </div>
 
               {/* 3. Services & Process Dropdown */}
-              <div 
+              <div
                 className="relative"
                 onMouseEnter={() => setActiveDropdown('services')}
                 onMouseLeave={() => setActiveDropdown(null)}
@@ -220,7 +212,7 @@ export default function Navbar({ theme, toggleTheme }) {
 
             {/* Right Action & Search */}
             <div className="hidden sm:flex items-center gap-2">
-              <button 
+              <button
                 onClick={() => setSearchOpen(!searchOpen)}
                 className="p-2 rounded-full hover:bg-slate-100 text-slate-600 transition-colors border border-slate-200 cursor-pointer"
                 title="Search Site"
@@ -235,7 +227,7 @@ export default function Navbar({ theme, toggleTheme }) {
             </div>
 
             {/* Mobile Menu Toggle */}
-            <button 
+            <button
               onClick={() => setMobileOpen(!mobileOpen)}
               className="lg:hidden p-2 rounded-full border border-slate-200 text-slate-700 hover:bg-slate-100 cursor-pointer"
             >
@@ -248,7 +240,7 @@ export default function Navbar({ theme, toggleTheme }) {
       {/* Mobile Drawer */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
@@ -290,9 +282,9 @@ export default function Navbar({ theme, toggleTheme }) {
               </div>
               <button onClick={() => setSearchOpen(false)} className="text-slate-400 hover:text-slate-900 font-bold cursor-pointer">×</button>
             </div>
-            
-            <input 
-              type="text" 
+
+            <input
+              type="text"
               placeholder="Search Germany zero tuition, Canada PGWP, UK admissions..."
               autoFocus
               className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-3 text-sm text-slate-900 focus:outline-none focus:border-blue-600 font-medium"
