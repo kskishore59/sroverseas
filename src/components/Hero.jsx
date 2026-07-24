@@ -81,7 +81,7 @@ export default function Hero() {
       let globeCenterX = width * 0.75;
       let globeCenterY = height * 0.5;
       const isDesktop = width >= 1024;
-      const globeRadius = isDesktop ? 360 : Math.min(width, height) * 0.6;
+      const globeRadius = isDesktop ? 360 : Math.min(width, height) * 0.65;
 
       if (cardRef.current && canvas) {
         const cardRect = cardRef.current.getBoundingClientRect();
@@ -207,7 +207,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="lg:col-span-7 space-y-6 text-left"
+          className="lg:col-span-7 space-y-6 text-center lg:text-left"
         >
 
           <div className="badge-tag">
@@ -225,7 +225,7 @@ export default function Hero() {
           </p>
 
           {/* Action CTAs */}
-          <div className="flex flex-wrap items-center gap-4 pt-2">
+          <div className="flex flex-wrap items-center gap-4 pt-2 justify-center lg:justify-start">
             <a href="#wizard" className="btn-primary text-base px-8 py-4 shadow-lg shadow-blue-600/20">
               <Sparkles size={18} />
               <span>Evaluate Admit & Scholarship</span>
@@ -279,11 +279,11 @@ export default function Hero() {
               rotateY,
               transformStyle: 'preserve-3d'
             }}
-            className="relative glass-panel-glow p-5 space-y-4 bg-white/90 backdrop-blur-2xl border border-slate-200 shadow-2xl rounded-3xl cursor-grab active:cursor-grabbing hover:border-blue-400 transition-colors duration-300"
+            className="relative glass-panel-glow p-5  space-y-4 bg-white/90 backdrop-blur-2xl border border-slate-200 shadow-2xl rounded-3xl cursor-grab active:cursor-grabbing hover:border-blue-400 transition-colors duration-300"
           >
 
             {/* Visual Student Frame */}
-            <div className="relative rounded-2xl overflow-hidden h-76 sm:h-60 border border-slate-200 shadow-inner">
+            <div className="relative rounded-2xl overflow-hidden h-76 border border-slate-200 shadow-inner">
               <img
                 src="/assets/students-hero.png"
                 alt="International Students"
@@ -334,11 +334,11 @@ export default function Hero() {
 
         {/* Live Departure Hubs — Mobile only, appears after the card */}
         <div className="lg:hidden pt-6 border-t border-slate-200/80 space-y-3 w-full max-w-md mx-auto">
-          <div className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+          <div className="text-xs font-bold uppercase tracking-wider justify-center text-slate-500 flex items-center gap-1.5">
             <Plane size={14} className="text-blue-600" />
             <span>Live Departure Hubs</span>
           </div>
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="grid grid-col-2 align-center justify-center items-center text-center gap-3">
             <motion.div whileHover={{ scale: 1.05 }} className="px-3.5 py-2 rounded-2xl bg-white border border-slate-200 shadow-sm text-xs font-bold text-slate-800 flex items-center gap-2 font-mono">
               <span className="text-blue-600">HYD ✈️ MUC</span>
               <span className="text-[10px] text-emerald-700 font-extrabold bg-emerald-50 px-2 py-0.5 rounded-md font-sans">Germany €0 Tuition</span>
