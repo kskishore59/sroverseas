@@ -152,9 +152,9 @@ export default function UniversitiesSection() {
   return (
     <section id="universities" className="py-24 relative bg-slate-50 border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -165,7 +165,7 @@ export default function UniversitiesSection() {
             <Building2 size={14} className="text-blue-600" />
             <span>Institutional Ties</span>
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight font-display text-slate-900">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-display text-slate-900">
             500+ Partner Universities Worldwide
           </h2>
           <p className="text-slate-600 text-xs sm:text-base font-normal max-w-2xl mx-auto">
@@ -185,11 +185,10 @@ export default function UniversitiesSection() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${
-                  activeTab === tab.id 
-                    ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25 scale-105' 
+                className={`px-4 py-2 rounded-full text-xs font-bold transition-all cursor-pointer ${activeTab === tab.id
+                    ? 'bg-blue-600 text-white shadow-md shadow-blue-600/25 scale-105'
                     : 'bg-white text-slate-700 hover:bg-slate-100 border border-slate-200'
-                }`}
+                  }`}
               >
                 {tab.label}
               </button>
@@ -208,10 +207,10 @@ export default function UniversitiesSection() {
               transition={{ duration: 0.5, delay: idx * 0.06 }}
               className="bg-white rounded-[32px] overflow-hidden border border-slate-200/90 shadow-md hover:shadow-2xl hover:border-blue-500/50 transition-all duration-300 group flex flex-col justify-between"
             >
-              
+
               {/* TOP HEADER BLOCK (Solid Country-Themed Header, No Gradient) */}
               <div className={`${u.headerBg} p-6 text-white space-y-4 relative border-b border-white/10`}>
-                
+
                 {/* Top Row: Country Code & QS Rank Pill */}
                 <div className="flex justify-between items-center text-xs">
                   <span className="font-extrabold tracking-widest text-white/90 font-mono text-sm">{u.countryCode}</span>
@@ -223,7 +222,7 @@ export default function UniversitiesSection() {
                 {/* Crest Icon & University Title */}
                 <div className="space-y-1 pt-1">
                   <div className="text-3xl mb-1">{u.icon}</div>
-                  <h3 className="text-xl sm:text-2xl font-black font-display text-white leading-tight group-hover:text-blue-200 transition-colors">
+                  <h3 className="text-xl sm:text-2xl font-extrabold font-display text-white leading-tight group-hover:text-blue-200 transition-colors">
                     {u.name}
                   </h3>
                   <div className="text-xs text-white/80 font-bold">{u.country} {u.flag}</div>
@@ -233,7 +232,7 @@ export default function UniversitiesSection() {
 
               {/* BOTTOM SPECS MATRIX BLOCK */}
               <div className="p-6 space-y-3.5 text-xs text-slate-700 bg-white font-medium">
-                
+
                 <div className="flex justify-between items-start border-b border-slate-100 pb-2.5">
                   <span className="text-slate-400 font-semibold flex items-center gap-1.5">
                     <span>📚</span> Programs:
@@ -271,8 +270,8 @@ export default function UniversitiesSection() {
 
                 {/* Bottom Pill CTA Button */}
                 <div className="pt-2">
-                  <a 
-                    href="#contact" 
+                  <a
+                    href="#contact"
                     className="w-full py-3 px-4 rounded-full border border-slate-200/90 text-slate-800 font-bold text-xs flex items-center justify-center gap-2 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all shadow-xs group-hover:shadow-md cursor-pointer"
                   >
                     <span>Apply via SR Overseas</span>

@@ -22,14 +22,14 @@ export default function ProcessRoadmap() {
 
   return (
     <section id="process" className="py-24 relative bg-slate-50 border-t border-slate-200 overflow-hidden">
-      
+
       {/* Ambient Glow Backdrop */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] bg-gradient-to-r from-blue-500/10 via-indigo-500/10 to-purple-500/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="container mx-auto max-w-6xl relative z-10 px-4">
-        
+
         {/* Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -40,7 +40,7 @@ export default function ProcessRoadmap() {
             <Sparkles size={14} className="text-blue-600" />
             <span>Interactive Enrollment Roadmap</span>
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight font-display text-slate-900">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-display text-slate-900">
             9-Step Path to Landing Overseas
           </h2>
           <p className="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto font-normal">
@@ -51,10 +51,10 @@ export default function ProcessRoadmap() {
         {/* 9-Stage Connected Stepper Ribbon */}
         <div className="bg-white p-4 sm:p-5 rounded-3xl border border-slate-200 shadow-md mb-8">
           <div className="flex justify-between items-center relative overflow-x-auto no-scrollbar py-2 px-2 gap-2 sm:gap-4">
-            
+
             {/* Connected Progress Line */}
             <div className="absolute top-1/2 left-6 right-6 h-1 bg-slate-100 -translate-y-1/2 rounded-full -z-0" />
-            <div 
+            <div
               className="absolute top-1/2 left-6 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 -translate-y-1/2 rounded-full transition-all duration-300 -z-0"
               style={{ width: `${(activeStep / 8) * 94}%` }}
             />
@@ -67,13 +67,12 @@ export default function ProcessRoadmap() {
                 <button
                   key={idx}
                   onClick={() => setActiveStep(idx)}
-                  className={`relative z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center font-extrabold text-xs sm:text-sm transition-all duration-200 cursor-pointer flex-shrink-0 ${
-                    isActive
+                  className={`relative z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-2xl flex items-center justify-center font-extrabold text-xs sm:text-sm transition-all duration-200 cursor-pointer flex-shrink-0 ${isActive
                       ? 'bg-blue-600 text-white shadow-lg shadow-blue-600/30 scale-110 ring-4 ring-blue-500/20'
                       : isPassed
-                      ? 'bg-emerald-600 text-white shadow-xs'
-                      : 'bg-white border-2 border-slate-200 text-slate-600 hover:border-blue-400'
-                  }`}
+                        ? 'bg-emerald-600 text-white shadow-xs'
+                        : 'bg-white border-2 border-slate-200 text-slate-600 hover:border-blue-400'
+                    }`}
                   title={step.title}
                 >
                   {isPassed ? <CheckCircle2 size={18} /> : step.step}
@@ -86,7 +85,7 @@ export default function ProcessRoadmap() {
 
         {/* Hero Active Stage Spotlight Card */}
         <div className="bg-white p-8 sm:p-12 rounded-3xl border border-slate-200 shadow-xl mb-12 relative overflow-hidden">
-          
+
           {/* Subtle Accent Glow Corner */}
           <div className="absolute top-0 right-0 w-40 h-40 bg-blue-500/5 rounded-bl-full pointer-events-none" />
 
@@ -102,12 +101,12 @@ export default function ProcessRoadmap() {
               {/* Card Top Row */}
               <div className="flex flex-wrap justify-between items-center gap-4 border-b border-slate-100 pb-5">
                 <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 font-black text-xl flex items-center justify-center border border-blue-100 shadow-xs font-display">
+                  <div className="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 font-extrabold text-xl flex items-center justify-center border border-blue-100 shadow-xs font-display">
                     {currentStepData.step}
                   </div>
                   <div>
                     <span className="text-xs font-extrabold uppercase tracking-widest text-blue-600">Stage {activeStep + 1} of 9</span>
-                    <h3 className="text-2xl sm:text-4xl font-black text-slate-900 font-display">
+                    <h3 className="text-2xl sm:text-4xl font-extrabold text-slate-900 font-display">
                       {currentStepData.title}
                     </h3>
                   </div>
@@ -116,11 +115,10 @@ export default function ProcessRoadmap() {
                 <div className="flex items-center gap-3">
                   <button
                     onClick={() => setIsPlaying(!isPlaying)}
-                    className={`px-4 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
-                      isPlaying 
-                        ? 'bg-amber-100 text-amber-800 border border-amber-200 shadow-xs' 
+                    className={`px-4 py-2 rounded-full text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${isPlaying
+                        ? 'bg-amber-100 text-amber-800 border border-amber-200 shadow-xs'
                         : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-                    }`}
+                      }`}
                   >
                     {isPlaying ? <Pause size={14} /> : <Play size={14} />}
                     <span>{isPlaying ? 'Pause Tour' : 'Auto Play'}</span>
@@ -145,7 +143,7 @@ export default function ProcessRoadmap() {
                   <span className="text-blue-600 font-extrabold">{Math.round(((activeStep + 1) / 9) * 100)}% Completed</span>
                 </div>
                 <div className="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden">
-                  <div 
+                  <div
                     className="h-full bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 transition-all duration-300 rounded-full"
                     style={{ width: `${((activeStep + 1) / 9) * 100}%` }}
                   />
@@ -193,21 +191,18 @@ export default function ProcessRoadmap() {
                 <div
                   key={idx}
                   onClick={() => setActiveStep(idx)}
-                  className={`p-5 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between space-y-3 ${
-                    isActive
+                  className={`p-5 rounded-2xl border text-left transition-all duration-200 cursor-pointer flex flex-col justify-between space-y-3 ${isActive
                       ? 'bg-blue-600 text-white border-blue-600 shadow-xl scale-102 ring-4 ring-blue-500/20'
                       : 'bg-white border-slate-200 text-slate-800 hover:border-blue-300 hover:shadow-md'
-                  }`}
+                    }`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className={`w-8 h-8 rounded-xl font-black text-xs flex items-center justify-center ${
-                      isActive ? 'bg-white/20 text-white' : 'bg-blue-50 text-blue-600'
-                    }`}>
+                    <span className={`w-8 h-8 rounded-xl font-extrabold text-xs flex items-center justify-center ${isActive ? 'bg-white/20 text-white' : 'bg-blue-50 text-blue-600'
+                      }`}>
                       {step.step}
                     </span>
-                    <span className={`text-[10px] font-bold uppercase tracking-wider ${
-                      isActive ? 'text-blue-100' : 'text-slate-400'
-                    }`}>
+                    <span className={`text-[10px] font-bold uppercase tracking-wider ${isActive ? 'text-blue-100' : 'text-slate-400'
+                      }`}>
                       Stage {idx + 1}
                     </span>
                   </div>

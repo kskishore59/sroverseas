@@ -35,7 +35,7 @@ export default function EligibilityWizard() {
     });
 
     const countryObj = countriesData.find((c) => c.id === targetCountry) || countriesData[0];
-    
+
     let chanceCategory = 'High Admit Probability (92%)';
     let scholarship = countryObj.scholarship;
     let MatchedUnivs = [];
@@ -135,9 +135,9 @@ export default function EligibilityWizard() {
   return (
     <section id="wizard" className="py-24 relative bg-slate-50 border-y border-slate-200">
       <div className="container mx-auto max-w-4xl">
-        
+
         {/* Header */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
@@ -148,7 +148,7 @@ export default function EligibilityWizard() {
             <Sparkles size={14} className="text-blue-600" />
             <span>AI Eligibility Engine</span>
           </span>
-          <h2 className="text-3xl sm:text-5xl font-black tracking-tight font-display text-slate-900">
+          <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-display text-slate-900">
             Instant Study Abroad Admit & Scholarship Assessor
           </h2>
           <p className="text-slate-600 text-xs sm:text-base font-normal max-w-2xl mx-auto">
@@ -158,7 +158,7 @@ export default function EligibilityWizard() {
 
         {/* Wizard Card Container with Glowing Border Halo */}
         <div className="bg-white p-8 sm:p-10 rounded-3xl border border-blue-500/20 shadow-[0_0_30px_rgba(37,99,235,0.08)] hover:shadow-[0_0_40px_rgba(37,99,235,0.15)] hover:border-blue-500/40 transition-all duration-300 relative overflow-hidden">
-          
+
           {/* Progress Step Indicator */}
           <div className="flex justify-between items-center mb-8 border-b border-slate-100 pb-4 text-xs font-bold">
             <span className={step >= 1 ? 'text-blue-600 font-extrabold' : 'text-slate-400'}>1. Academic Level</span>
@@ -180,11 +180,10 @@ export default function EligibilityWizard() {
                     <button
                       key={item.id}
                       onClick={() => setEducation(item.id)}
-                      className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
-                        education === item.id 
-                          ? 'bg-blue-50/80 border-blue-500 text-blue-900 shadow-[0_0_15px_rgba(37,99,235,0.2)]' 
+                      className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${education === item.id
+                          ? 'bg-blue-50/80 border-blue-500 text-blue-900 shadow-[0_0_15px_rgba(37,99,235,0.2)]'
                           : 'bg-white border-slate-200 text-slate-600 hover:border-blue-300'
-                      }`}
+                        }`}
                     >
                       <div className="font-extrabold text-slate-900">{item.label}</div>
                       <div className="text-[10px] text-slate-500 mt-1">{item.sub}</div>
@@ -198,10 +197,10 @@ export default function EligibilityWizard() {
                   <span>Academic Percentage / GPA</span>
                   <span className="text-blue-600 font-extrabold text-base">{percentage}%</span>
                 </div>
-                <input 
-                  type="range" 
-                  min="50" 
-                  max="95" 
+                <input
+                  type="range"
+                  min="50"
+                  max="95"
                   value={percentage}
                   onChange={(e) => setPercentage(Number(e.target.value))}
                   className="w-full h-2 bg-slate-100 rounded-lg appearance-none cursor-pointer accent-blue-600"
@@ -213,7 +212,7 @@ export default function EligibilityWizard() {
                 </div>
               </div>
 
-              <button 
+              <button
                 onClick={() => setStep(2)}
                 className="btn-primary w-full py-3.5 mt-4"
               >
@@ -226,14 +225,14 @@ export default function EligibilityWizard() {
           {/* STEP 2: Destination & IELTS with Custom Dropdowns */}
           {step === 2 && (
             <div className="space-y-6 animate-fade-in text-xs">
-              <CustomSelect 
+              <CustomSelect
                 label="Target Study Destination"
                 options={countrySelectOptions}
                 value={targetCountry}
                 onChange={setTargetCountry}
               />
 
-              <CustomSelect 
+              <CustomSelect
                 label="IELTS / TOEFL / English Proficiency"
                 options={ieltsSelectOptions}
                 value={ieltsScore}
@@ -241,13 +240,13 @@ export default function EligibilityWizard() {
               />
 
               <div className="flex gap-3 pt-4">
-                <button 
+                <button
                   onClick={() => setStep(1)}
                   className="btn-outline flex-1 py-3.5 cursor-pointer"
                 >
                   Back
                 </button>
-                <button 
+                <button
                   onClick={handleEvaluate}
                   className="btn-primary flex-1 py-3.5 bg-emerald-600 hover:bg-emerald-500 shadow-[0_0_25px_rgba(5,150,105,0.35)] cursor-pointer"
                 >
@@ -265,7 +264,7 @@ export default function EligibilityWizard() {
                 <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center mx-auto border border-emerald-300 shadow-[0_0_25px_rgba(16,185,129,0.3)]">
                   <CheckCircle2 size={36} />
                 </div>
-                <h3 className="text-2xl font-black text-slate-900 font-display">
+                <h3 className="text-2xl font-extrabold text-slate-900 font-display">
                   {result.flag} {result.countryName} Official Evaluation Complete
                 </h3>
                 <div className="inline-block px-4 py-1.5 rounded-full bg-emerald-50 border border-emerald-300 text-emerald-700 font-extrabold text-sm shadow-[0_0_15px_rgba(16,185,129,0.2)]">
@@ -322,13 +321,13 @@ export default function EligibilityWizard() {
 
               {/* Action Buttons */}
               <div className="flex flex-wrap gap-4 pt-4">
-                <a 
-                  href="#contact" 
+                <a
+                  href="#contact"
                   className="btn-primary flex-1 py-4 text-sm shadow-[0_0_25px_rgba(37,99,235,0.4)]"
                 >
                   Claim Scholarship & Apply Now
                 </a>
-                <button 
+                <button
                   onClick={handleReset}
                   className="btn-outline py-4 px-6 text-xs flex items-center gap-2 cursor-pointer"
                 >

@@ -81,7 +81,7 @@ export default function Hero() {
       let globeCenterX = width * 0.75;
       let globeCenterY = height * 0.5;
       const isDesktop = width >= 1024;
-      const globeRadius = isDesktop ? 430 : Math.min(width, height) * 0.44;
+      const globeRadius = isDesktop ? 360 : Math.min(width, height) * 0.36;
 
       if (isDesktop && cardRef.current && canvas) {
         const cardRect = cardRef.current.getBoundingClientRect();
@@ -192,7 +192,7 @@ export default function Hero() {
 
   return (
     <section id="home" className="relative min-h-[92vh] pt-8 pb-20 flex items-center overflow-hidden bg-gradient-to-b from-blue-50/70 via-indigo-50/20 to-white">
-      
+
       {/* Background 3D Globe Canvas */}
       <div className="absolute inset-0 max-h-full w-full overflow-hidden pointer-events-none z-0">
         <canvas ref={canvasRef} className="w-full h-full" />
@@ -204,26 +204,26 @@ export default function Hero() {
 
       {/* Enforced max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 for perfect widescreen alignment */}
       <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        
+
         {/* Left Column: Hero Copy */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           className="lg:col-span-7 space-y-6 text-left"
         >
-          
+
           <div className="badge-tag">
             <Sparkles size={14} className="text-blue-600 animate-spin" />
             <span>Study Abroad Consultancy • Hyderabad</span>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl font-black tracking-tight leading-[1.08] font-display text-slate-900">
+          <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.08] font-display text-slate-900">
             Architecting Your <br />
             <span className="heading-brand-gradient">Global Education.</span>
           </h1>
 
-          <p className="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed font-normal">
+          <p className="text-base sm:text-lg text-slate-600 max-w-xl leading-relaxed font-normal">
             Elevating ambitious students into top global universities. Expert admissions, zero-tuition pathways in Germany & France, scholarships, and 98% visa approval.
           </p>
 
@@ -245,13 +245,13 @@ export default function Hero() {
               <Plane size={14} className="text-blue-600" />
               <span>Live Departure Hubs</span>
             </div>
-            
+
             <div className="flex flex-wrap items-center gap-2">
               <motion.div whileHover={{ scale: 1.05 }} className="px-3.5 py-2 rounded-2xl bg-white border border-slate-200 shadow-sm text-xs font-bold text-slate-800 flex items-center gap-2 font-mono">
                 <span className="text-blue-600">HYD ✈️ MUC</span>
                 <span className="text-[10px] text-emerald-700 font-extrabold bg-emerald-50 px-2 py-0.5 rounded-md font-sans">Germany €0 Tuition</span>
               </motion.div>
-              
+
               <motion.div whileHover={{ scale: 1.05 }} className="px-3.5 py-2 rounded-2xl bg-white border border-slate-200 shadow-sm text-xs font-bold text-slate-800 flex items-center gap-2 font-mono">
                 <span className="text-blue-600">HYD ✈️ YVR</span>
                 <span className="text-[10px] text-blue-700 font-extrabold bg-blue-50 px-2 py-0.5 rounded-md font-sans">Canada 3Y PGWP</span>
@@ -267,7 +267,7 @@ export default function Hero() {
         </motion.div>
 
         {/* Right Column: Visual Photo Card Aligned DEAD CENTER on Globe with 3D Tilt */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -284,16 +284,16 @@ export default function Hero() {
             }}
             className="relative glass-panel-glow p-5 space-y-4 bg-white/90 backdrop-blur-2xl border border-slate-200 shadow-2xl rounded-3xl cursor-grab active:cursor-grabbing hover:border-blue-400 transition-colors duration-300"
           >
-            
+
             {/* Visual Student Frame */}
             <div className="relative rounded-2xl overflow-hidden h-76 border border-slate-200 shadow-inner">
-              <img 
-                src="/assets/students-hero.png" 
-                alt="International Students" 
+              <img
+                src="/assets/students-hero.png"
+                alt="International Students"
                 className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent" />
-              
+
               <div className="absolute bottom-4 left-4 right-4 flex justify-between items-center">
                 <div className="bg-white/95 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-emerald-500/30 text-emerald-700 text-xs font-extrabold flex items-center gap-1.5 shadow-md">
                   <ShieldCheck size={16} className="text-emerald-600" />
@@ -305,17 +305,17 @@ export default function Hero() {
             {/* Metric Matrix */}
             <div className="grid grid-cols-2 gap-3 text-center pt-1">
               <div className="p-3.5 rounded-2xl bg-blue-50/80 border border-blue-100 shadow-xs">
-                <div className="text-2xl font-black text-blue-600 font-display">100+</div>
+                <div className="text-2xl font-extrabold text-blue-600 font-display">100+</div>
                 <div className="text-[10px] text-slate-600 uppercase font-bold tracking-wider mt-0.5">Guided Students</div>
               </div>
               <div className="p-3.5 rounded-2xl bg-indigo-50/80 border border-indigo-100 shadow-xs">
-                <div className="text-2xl font-black text-indigo-600 font-display">500+</div>
+                <div className="text-2xl font-extrabold text-indigo-600 font-display">500+</div>
                 <div className="text-[10px] text-slate-600 uppercase font-bold tracking-wider mt-0.5">Partner Univs</div>
               </div>
             </div>
 
             {/* Interactive 3D Floating Parallax Badge */}
-            <motion.div 
+            <motion.div
               style={{
                 x: badgeTranslateX,
                 y: badgeTranslateY,

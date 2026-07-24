@@ -46,18 +46,18 @@ export default function ContactForm() {
   return (
     <section id="contact" className="py-24 relative bg-slate-50 border-t border-slate-200">
       <div className="container mx-auto">
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
+
           {/* Left Panel: Contact Info & Map */}
           <div className="lg:col-span-6 space-y-8">
-            
+
             <div className="space-y-4">
               <span className="badge-tag">
                 <Sparkles size={14} className="text-blue-600" />
                 <span>Get in Touch</span>
               </span>
-              <h2 className="text-3xl sm:text-5xl font-black tracking-tight font-display text-slate-900">
+              <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight font-display text-slate-900">
                 Reserve Your Free Consultation Slot
               </h2>
               <p className="text-slate-600 text-base font-normal">
@@ -67,8 +67,8 @@ export default function ContactForm() {
 
             {/* Details Cards */}
             <div className="space-y-4">
-              <a 
-                href="tel:+917416007557" 
+              <a
+                href="tel:+917416007557"
                 className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4 hover:border-blue-500 transition-colors group"
               >
                 <div className="w-12 h-12 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -80,8 +80,8 @@ export default function ContactForm() {
                 </div>
               </a>
 
-              <a 
-                href="mailto:srabroadconsultancy@gmail.com" 
+              <a
+                href="mailto:srabroadconsultancy@gmail.com"
                 className="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm flex items-center gap-4 hover:border-blue-500 transition-colors group"
               >
                 <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -106,13 +106,13 @@ export default function ContactForm() {
 
             {/* Google Map */}
             <div className="bg-white overflow-hidden rounded-3xl border border-slate-200 shadow-sm h-60">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3802.2656936130675!2d78.48286657517069!3d17.63757078329284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTfCsDM4JzE1LjMiTiA3OMKwMjknMDcuNiJF!5e0!3m2!1sen!2sin!4v1783096206296!5m2!1sen!2sin" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                allowFullScreen="" 
-                loading="lazy" 
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3802.2656936130675!2d78.48286657517069!3d17.63757078329284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTfCsDM4JzE1LjMiTiA3OMKwMjknMDcuNiJF!5e0!3m2!1sen!2sin!4v1783096206296!5m2!1sen!2sin"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen=""
+                loading="lazy"
                 title="SR Overseas Office Map"
               />
             </div>
@@ -122,9 +122,9 @@ export default function ContactForm() {
           {/* Right Panel: Form Card */}
           <div className="lg:col-span-6">
             <div className="bg-white p-8 sm:p-10 rounded-3xl border border-slate-200 shadow-xl space-y-6">
-              
+
               <div className="border-b border-slate-100 pb-4">
-                <h3 className="text-2xl font-black text-slate-900 font-display">Book Free Consultation</h3>
+                <h3 className="text-2xl font-extrabold text-slate-900 font-display">Book Free Consultation</h3>
                 <p className="text-xs text-slate-500 font-medium">Fill in details to connect directly via WhatsApp</p>
               </div>
 
@@ -142,7 +142,7 @@ export default function ContactForm() {
                   <p className="text-xs text-slate-600">
                     Thank you! Our senior study abroad counselor will review your profile and respond within 24 hours.
                   </p>
-                  <button 
+                  <button
                     onClick={() => setSubmitted(false)}
                     className="btn-outline text-xs px-6 py-2.5"
                   >
@@ -153,7 +153,7 @@ export default function ContactForm() {
                 <form onSubmit={handleSubmit} className="space-y-4 text-xs">
                   <div>
                     <label className="block text-slate-700 font-bold mb-1">Full Name *</label>
-                    <input 
+                    <input
                       type="text"
                       name="name"
                       required
@@ -167,7 +167,7 @@ export default function ContactForm() {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-slate-700 font-bold mb-1">Email Address *</label>
-                      <input 
+                      <input
                         type="email"
                         name="email"
                         required
@@ -179,7 +179,7 @@ export default function ContactForm() {
                     </div>
                     <div>
                       <label className="block text-slate-700 font-bold mb-1">Phone / WhatsApp Number *</label>
-                      <input 
+                      <input
                         type="tel"
                         name="phone"
                         required
@@ -193,7 +193,7 @@ export default function ContactForm() {
 
                   <div>
                     <label className="block text-slate-700 font-bold mb-1">Preferred Destination *</label>
-                    <input 
+                    <input
                       type="text"
                       name="destination"
                       required
@@ -206,7 +206,7 @@ export default function ContactForm() {
 
                   <div>
                     <label className="block text-slate-700 font-bold mb-1">Message or Query Details</label>
-                    <textarea 
+                    <textarea
                       name="message"
                       rows={3}
                       placeholder="Specify your academic background, preferred course or budget limits..."
@@ -216,7 +216,7 @@ export default function ContactForm() {
                     />
                   </div>
 
-                  <button 
+                  <button
                     type="submit"
                     className="btn-primary w-full py-4 text-sm font-bold bg-[#25D366] hover:bg-[#20ba5a] shadow-emerald-600/20"
                   >
