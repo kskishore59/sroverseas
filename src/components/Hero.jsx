@@ -81,16 +81,13 @@ export default function Hero() {
       let globeCenterX = width * 0.75;
       let globeCenterY = height * 0.5;
       const isDesktop = width >= 1024;
-      const globeRadius = isDesktop ? 360 : Math.min(width, height) * 0.36;
+      const globeRadius = isDesktop ? 360 : Math.min(width, height) * 0.6;
 
-      if (isDesktop && cardRef.current && canvas) {
+      if (cardRef.current && canvas) {
         const cardRect = cardRef.current.getBoundingClientRect();
         const canvasRect = canvas.getBoundingClientRect();
         globeCenterX = cardRect.left + cardRect.width / 2 - canvasRect.left;
         globeCenterY = cardRect.top + cardRect.height / 2 - canvasRect.top;
-      } else if (!isDesktop) {
-        globeCenterX = width * 0.5;
-        globeCenterY = height * 0.5;
       }
 
       // Render 3D Rotating Globe Wireframe Ring
@@ -239,8 +236,8 @@ export default function Hero() {
             </a>
           </div>
 
-          {/* Departure Flight Ticket Pills */}
-          <div className="pt-8 border-t border-slate-200/80 space-y-3">
+          {/* Departure Flight Ticket Pills — Desktop only; mobile version appears below card */}
+          <div className="hidden lg:block pt-8 border-t border-slate-200/80 space-y-3">
             <div className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
               <Plane size={14} className="text-blue-600" />
               <span>Live Departure Hubs</span>
@@ -271,7 +268,7 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="lg:col-span-5 relative perspective-1000"
+          className="lg:col-span-5 relative perspective-1000 mx-auto w-full max-w-md lg:max-w-none lg:mx-0 "
         >
           <motion.div
             ref={cardRef}
@@ -286,7 +283,7 @@ export default function Hero() {
           >
 
             {/* Visual Student Frame */}
-            <div className="relative rounded-2xl overflow-hidden h-76 border border-slate-200 shadow-inner">
+            <div className="relative rounded-2xl overflow-hidden h-76 sm:h-60 border border-slate-200 shadow-inner">
               <img
                 src="/assets/students-hero.png"
                 alt="International Students"
@@ -321,7 +318,7 @@ export default function Hero() {
                 y: badgeTranslateY,
                 translateZ: 40
               }}
-              className="absolute -top-8 -right-6 bg-white p-4 rounded-2xl border border-slate-200 shadow-2xl flex items-center gap-3 animate-float-slow z-20"
+              className="absolute -top-4 sm:-top-8 right-1 sm:-right-6 bg-white p-2.5 sm:p-4 rounded-2xl border border-slate-200 shadow-2xl flex items-center gap-2 sm:gap-3 animate-float-slow z-20"
             >
               <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
                 <Award size={20} />
@@ -334,6 +331,28 @@ export default function Hero() {
 
           </motion.div>
         </motion.div>
+
+        {/* Live Departure Hubs — Mobile only, appears after the card */}
+        <div className="lg:hidden pt-6 border-t border-slate-200/80 space-y-3 w-full max-w-md mx-auto">
+          <div className="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+            <Plane size={14} className="text-blue-600" />
+            <span>Live Departure Hubs</span>
+          </div>
+          <div className="flex flex-wrap items-center gap-2">
+            <motion.div whileHover={{ scale: 1.05 }} className="px-3.5 py-2 rounded-2xl bg-white border border-slate-200 shadow-sm text-xs font-bold text-slate-800 flex items-center gap-2 font-mono">
+              <span className="text-blue-600">HYD ✈️ MUC</span>
+              <span className="text-[10px] text-emerald-700 font-extrabold bg-emerald-50 px-2 py-0.5 rounded-md font-sans">Germany €0 Tuition</span>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} className="px-3.5 py-2 rounded-2xl bg-white border border-slate-200 shadow-sm text-xs font-bold text-slate-800 flex items-center gap-2 font-mono">
+              <span className="text-blue-600">HYD ✈️ YVR</span>
+              <span className="text-[10px] text-blue-700 font-extrabold bg-blue-50 px-2 py-0.5 rounded-md font-sans">Canada 3Y PGWP</span>
+            </motion.div>
+            <motion.div whileHover={{ scale: 1.05 }} className="px-3.5 py-2 rounded-2xl bg-white border border-slate-200 shadow-sm text-xs font-bold text-slate-800 flex items-center gap-2 font-mono">
+              <span className="text-blue-600">HYD ✈️ LHR</span>
+              <span className="text-[10px] text-purple-700 font-extrabold bg-purple-50 px-2 py-0.5 rounded-md font-sans">UK 1Y Master's</span>
+            </motion.div>
+          </div>
+        </div>
 
       </div>
     </section>
